@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const heroImages = [
   "/heroweb1.jpeg",
@@ -55,7 +56,7 @@ export default function WarehouseAutomationPage() {
       <nav className="fixed top-0 w-full z-50 px-14 pt-6 pb-3 flex items-center justify-between bg-gradient-to-b from-black/60 to-transparent">
         <div className="flex items-center gap-6">
           <Link href="/">
-            <img src="/exclusive-logo.png" alt="Exclusive Logo" className="h-32 w-auto mt-2 cursor-pointer" />
+            <Image src="/exclusive-logo.png" alt="Exclusive Logo" width={128} height={128} className="mt-2 cursor-pointer" />
           </Link>
           <span className="text-4xl font-bold -mt-1">Exclusive Energy & Electric</span>
         </div>
@@ -73,19 +74,19 @@ export default function WarehouseAutomationPage() {
           })}
           <div className="flex items-center gap-5 ml-10">
             <a href="https://www.facebook.com/exclusiveenergyinc/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <img src="/facebook.png" alt="Facebook" className="h-10 w-10 filter invert transition-transform hover:scale-110 hover:brightness-200" />
+              <Image src="/facebook.png" alt="Facebook" width={40} height={40} className="filter invert transition-transform hover:scale-110 hover:brightness-200" />
             </a>
             <a href="https://www.instagram.com/exclusive_energy_electric/reels/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <img src="/instagram.png" alt="Instagram" className="h-10 w-10 filter invert transition-transform hover:scale-110 hover:brightness-200" />
+              <Image src="/instagram.png" alt="Instagram" width={40} height={40} className="filter invert transition-transform hover:scale-110 hover:brightness-200" />
             </a>
             <a href="https://www.linkedin.com/company/exclusive-energy-inc-" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <img src="/linkedin.png" alt="LinkedIn" className="h-10 w-10 filter invert transition-transform hover:scale-110 hover:brightness-200" />
+              <Image src="/linkedin.png" alt="LinkedIn" width={40} height={40} className="filter invert transition-transform hover:scale-110 hover:brightness-200" />
             </a>
           </div>
         </div>
       </nav>
 
-      {/* Page Content */}
+      {/* Hero Section */}
       <section
         className="min-h-screen bg-cover bg-center flex flex-col justify-center items-center px-10 transition-all duration-1000 ease-in-out relative pt-48 pb-40"
         style={{ backgroundImage: `url('${heroImages[currentImage]}')` }}
@@ -107,7 +108,7 @@ export default function WarehouseAutomationPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {products.map((item, index) => (
               <div key={index} className="flex flex-col h-full rounded-lg shadow-lg overflow-hidden bg-white">
-                <img src={item.img} alt={item.title} className="w-full h-64 object-cover" />
+                <Image src={item.img} alt={item.title} width={500} height={300} className="w-full h-64 object-cover" />
                 <div className="bg-white text-black p-4 flex flex-col flex-1 justify-between">
                   <div>
                     <h3 className="text-lg font-bold text-blue-600 mb-2">{item.title}</h3>

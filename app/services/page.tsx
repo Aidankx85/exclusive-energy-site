@@ -47,6 +47,12 @@ export default function ServicesPage() {
       desc: "Scheduled inspections, maintenance, and emergency repairs for lasting system health.",
       href: "/service-details/maintenance",
     },
+    {
+      img: "/warehouse-robot-cover.jpg",
+      title: "Warehouse Automation",
+      desc: "Turnkey automation systems including autonomous forklifts and smart controls — engineered to streamline operations.",
+      href: "/service-details/warehouse-automation",
+    },
   ];
 
   return (
@@ -96,7 +102,13 @@ export default function ServicesPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 justify-center">
             {services.map((item, idx) => (
               <div key={idx} className="flex flex-col h-full rounded-lg shadow-lg overflow-hidden">
-                <Image src={item.img} alt={item.title} width={500} height={240} className="w-full h-60 object-cover" />
+                {item.href === "/service-details/warehouse-automation" ? (
+                  <video autoPlay muted loop playsInline className="w-full h-60 object-cover">
+                    <source src="/warehouse-robot-.mp4" type="video/mp4" />
+                  </video>
+                ) : (
+                  <Image src={item.img} alt={item.title} width={500} height={240} className="w-full h-60 object-cover" />
+                )}
                 <div className="bg-white text-black p-4 flex flex-col flex-1 justify-between">
                   <div>
                     <h3 className="text-lg font-bold text-blue-600 mb-2">{item.title}</h3>
@@ -110,23 +122,6 @@ export default function ServicesPage() {
                 </div>
               </div>
             ))}
-            {/* Warehouse Automation Card */}
-            <div className="flex flex-col h-full rounded-lg shadow-lg overflow-hidden">
-              <video autoPlay muted loop playsInline className="w-full h-60 object-cover">
-                <source src="/warehouse-robot-.mp4" type="video/mp4" />
-              </video>
-              <div className="bg-white text-black p-4 flex flex-col flex-1 justify-between">
-                <div>
-                  <h3 className="text-lg font-bold text-blue-600 mb-2">Warehouse Automation</h3>
-                  <p className="text-sm mb-4">Turnkey automation systems including autonomous forklifts and smart controls — engineered to streamline operations.</p>
-                </div>
-                <Link href="/service-details/warehouse-automation">
-                  <span className="bg-blue-600 text-white px-4 py-2 text-sm font-semibold rounded hover:bg-blue-700 text-center block w-fit cursor-pointer">
-                    READ MORE
-                  </span>
-                </Link>
-              </div>
-            </div>
           </div>
         </div>
       </section>

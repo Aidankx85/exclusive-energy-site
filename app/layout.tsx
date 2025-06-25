@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Exclusive Energy & Electric",
@@ -38,9 +39,15 @@ export default function RootLayout({
             <div className="flex flex-col items-center">
               <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
               <ul className="mb-6 space-y-1 text-sm text-center">
-                <li><a href="/about" className="hover:text-blue-600">+ About</a></li>
-                <li><a href="/#services" className="hover:text-blue-600">+ Services</a></li>
-                <li><a href="/#contact" className="hover:text-blue-600">+ Contact</a></li>
+                <li>
+                  <Link href="/about" className="hover:text-blue-600">+ About</Link>
+                </li>
+                <li>
+                  <Link href="/#services" className="hover:text-blue-600">+ Services</Link>
+                </li>
+                <li>
+                  <Link href="/#contact" className="hover:text-blue-600">+ Contact</Link>
+                </li>
               </ul>
             </div>
 
