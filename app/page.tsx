@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const heroImages = [
   "/heroweb1.jpeg",
@@ -21,7 +22,7 @@ export default function Home() {
       setCurrentImage((prev) => (prev + 1) % heroImages.length);
     }, 8000);
     return () => clearInterval(interval);
-  }, []);
+  }, [heroImages.length]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -45,7 +46,7 @@ export default function Home() {
       <nav className="fixed top-0 w-full z-50 px-14 pt-6 pb-3 flex items-center justify-between bg-gradient-to-b from-black/60 to-transparent">
         <div className="flex items-center gap-6">
           <Link href="/">
-            <img src="/exclusive-logo.png" alt="Exclusive Logo" className="h-32 w-auto mt-2 cursor-pointer" />
+            <Image src="/exclusive-logo.png" alt="Exclusive Logo" width={128} height={128} className="mt-2 cursor-pointer" />
           </Link>
           <span className="text-4xl font-bold -mt-1">Exclusive Energy & Electric</span>
         </div>
@@ -63,13 +64,13 @@ export default function Home() {
           })}
           <div className="flex items-center gap-5 ml-10">
             <a href="https://www.facebook.com/exclusiveenergyinc/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <img src="/facebook.png" alt="Facebook" className="h-10 w-10 filter invert transition-transform hover:scale-110 hover:brightness-200" />
+              <Image src="/facebook.png" alt="Facebook" width={40} height={40} className="filter invert transition-transform hover:scale-110 hover:brightness-200" />
             </a>
             <a href="https://www.instagram.com/exclusive_energy_electric/reels/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <img src="/instagram.png" alt="Instagram" className="h-10 w-10 filter invert transition-transform hover:scale-110 hover:brightness-200" />
+              <Image src="/instagram.png" alt="Instagram" width={40} height={40} className="filter invert transition-transform hover:scale-110 hover:brightness-200" />
             </a>
             <a href="https://www.linkedin.com/company/exclusive-energy-inc-" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <img src="/linkedin.png" alt="LinkedIn" className="h-10 w-10 filter invert transition-transform hover:scale-110 hover:brightness-200" />
+              <Image src="/linkedin.png" alt="LinkedIn" width={40} height={40} className="filter invert transition-transform hover:scale-110 hover:brightness-200" />
             </a>
           </div>
         </div>
@@ -114,14 +115,14 @@ export default function Home() {
 
             {formSubmitted ? (
               <div className="text-center text-gray-800">
-                <img src="/exclusive-logo.png" alt="Exclusive Logo" className="h-20 mx-auto mb-4" />
+                <Image src="/exclusive-logo.png" alt="Exclusive Logo" width={80} height={80} className="mx-auto mb-4" />
                 <h2 className="text-2xl font-bold mb-2">Thank You!</h2>
-                <p>Your estimate request has been submitted successfully. We'll be in touch shortly.</p>
+                <p>Your estimate request has been submitted successfully. We&apos;ll be in touch shortly.</p>
               </div>
             ) : (
               <>
                 <div className="flex justify-center mb-4">
-                  <img src="/exclusive-logo.png" alt="Exclusive Logo" className="h-20" />
+                  <Image src="/exclusive-logo.png" alt="Exclusive Logo" width={80} height={80} />
                 </div>
                 <h2 className="text-2xl font-bold mb-4 text-gray-800 text-center">Request an Estimate</h2>
                 <form className="space-y-4" onSubmit={handleSubmit}>
@@ -148,21 +149,31 @@ export default function Home() {
       <section className="py-20 px-6 bg-white text-gray-800">
         <h2 className="text-3xl font-bold mb-12 text-center">What We Do</h2>
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 justify-center">
-          {[
-            { img: "/what1.jpeg", title: "Electrical Wiring & Control", desc: "Expertly installed electrical infrastructure to support safe and reliable systems." },
-            { img: "/what2.jpeg", title: "Energy Efficient Solutions", desc: "Lighting and automation upgrades designed to save energy and reduce costs." },
-            { img: "/what3.jpg", title: "Warehouse Power Solutions", desc: "High-load electrical solutions customized for safe and efficient warehouse operations." },
-            { img: "/what4.jpg", title: "Service & Maintenance", desc: "Scheduled inspections, maintenance, and emergency repairs for lasting system health." },
-          ].map((item, idx) => (
+          {["/what1.jpeg", "/what2.jpeg", "/what3.jpg", "/what4.jpg"].map((src, idx) => (
             <div key={idx} className="relative group overflow-hidden rounded-lg shadow-lg">
-              <img src={item.img} alt={item.title} className="w-full h-80 object-cover group-hover:scale-105 transition-transform" />
+              <Image src={src} alt="What We Do" width={400} height={320} className="w-full h-80 object-cover group-hover:scale-105 transition-transform" />
               <div className="absolute inset-0 bg-black/50 flex flex-col justify-end p-4 text-white">
-                <h3 className="text-lg font-bold">{item.title}</h3>
-                <p className="text-sm mb-3">{item.desc}</p>
+                <h3 className="text-lg font-bold">
+                  {[
+                    "Electrical Wiring & Control",
+                    "Energy Efficient Solutions",
+                    "Warehouse Power Solutions",
+                    "Service & Maintenance",
+                  ][idx]}
+                </h3>
+                <p className="text-sm mb-3">
+                  {[
+                    "Expertly installed electrical infrastructure to support safe and reliable systems.",
+                    "Lighting and automation upgrades designed to save energy and reduce costs.",
+                    "High-load electrical solutions customized for safe and efficient warehouse operations.",
+                    "Scheduled inspections, maintenance, and emergency repairs for lasting system health.",
+                  ][idx]}
+                </p>
                 <a href="#" className="bg-blue-500 px-4 py-2 text-sm font-semibold rounded hover:bg-blue-600 w-fit">READ MORE</a>
               </div>
             </div>
           ))}
+
           <div className="relative group overflow-hidden rounded-lg shadow-lg">
             <video autoPlay muted loop playsInline className="w-full h-80 object-cover">
               <source src="/warehouse-robot-.mp4" type="video/mp4" />
@@ -180,14 +191,14 @@ export default function Home() {
       <section className="bg-gray-100 text-gray-800 py-20 px-6 animate-fadeIn">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center bg-white p-10 rounded-xl shadow-lg">
           <div>
-            <img src="/whoweare.jpeg" alt="Who We Are" className="rounded-lg shadow-md" />
+            <Image src="/whoweare.jpeg" alt="Who We Are" width={600} height={400} className="rounded-lg shadow-md" />
           </div>
           <div>
             <h2 className="text-3xl font-bold text-blue-600 mb-4">Who We Are</h2>
             <p className="text-lg leading-relaxed">
               <strong>Where Energy Meets Excellence.</strong><br /><br />
               Founded as a partnership in 2007, Exclusive Energy & Electric has built a reputation for reliability and precision in commercial electrical contracting. We specialize in real estate developments, retail stores, warehouse infrastructure, government buildings, religious centers, and major clients such as Amazon, Chipotle, and Toyo Tires.<br /><br />
-              Locally owned and operated in Southern California, we’ve served the region for over two decades with expertise in tenant improvements, ground-up builds, design-build projects, lighting retrofits, and energy-efficient applications. Whether powering a logistics center or retrofitting a modern retail chain, we deliver excellence at every stage.
+              Locally owned and operated in Southern California, we&apos;ve served the region for over two decades with expertise in tenant improvements, ground-up builds, design-build projects, lighting retrofits, and energy-efficient applications. Whether powering a logistics center or retrofitting a modern retail chain, we deliver excellence at every stage.
             </p>
           </div>
         </div>

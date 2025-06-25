@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Exclusive Energy & Electric",
@@ -22,8 +23,8 @@ export default function RootLayout({
             {/* ABC Info + Troops */}
             <div className="flex flex-col items-start">
               <div className="flex items-center gap-6 mb-4">
-                <img src="/abc-member.png" alt="ABC Member" className="h-12" />
-                <img src="/we-support-our-troops.png" alt="We Support Our Troops" className="h-24" />
+                <Image src="/abc-member.png" alt="ABC Member" width={48} height={48} />
+                <Image src="/we-support-our-troops.png" alt="We Support Our Troops" width={96} height={96} />
               </div>
               <p className="text-sm leading-relaxed">
                 We are proud members of the Associated Builders and Contractors, a national trade association
@@ -47,19 +48,19 @@ export default function RootLayout({
             <div>
               <h3 className="text-lg font-semibold mb-4">Contact</h3>
               <div className="flex items-center mb-2">
-                <img src="/phonelogo.png" alt="Phone" className="h-5 w-5 mr-2" />
+                <Image src="/phonelogo.png" alt="Phone" width={20} height={20} className="mr-2" />
                 <p className="text-sm">951-299-7505</p>
               </div>
               <div className="flex items-center mb-2">
-                <img src="/emaillogo.png" alt="Email" className="h-5 w-5 mr-2" />
+                <Image src="/emaillogo.png" alt="Email" width={20} height={20} className="mr-2" />
                 <p className="text-sm">estimating@exclusive-ca.com</p>
               </div>
               <div className="flex items-center mb-2">
-                <img src="/locationlogo.png" alt="Location" className="h-5 w-5 mr-2" />
+                <Image src="/locationlogo.png" alt="Location" width={20} height={20} className="mr-2" />
                 <p className="text-sm">102 E Grand Blvd, Corona, CA 92879</p>
               </div>
               <div className="flex items-center mb-2">
-                <img src="/clocklogo.png" alt="Hours" className="h-5 w-5 mr-2" />
+                <Image src="/clocklogo.png" alt="Hours" width={20} height={20} className="mr-2" />
                 <p className="text-sm">Mon–Fri 7AM–4PM<br />Sat–Sun Closed</p>
               </div>
             </div>

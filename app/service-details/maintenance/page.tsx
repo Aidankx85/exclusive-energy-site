@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const heroImages = [
   "/heroweb1.jpeg",
@@ -27,7 +28,7 @@ export default function ServiceMaintenancePage() {
       <nav className="fixed top-0 w-full z-50 px-14 pt-6 pb-3 flex items-center justify-between bg-gradient-to-b from-black/60 to-transparent">
         <div className="flex items-center gap-6">
           <Link href="/">
-            <img src="/exclusive-logo.png" alt="Exclusive Logo" className="h-32 w-auto mt-2 cursor-pointer" />
+            <Image src="/exclusive-logo.png" alt="Exclusive Logo" width={128} height={128} className="mt-2 cursor-pointer" />
           </Link>
           <span className="text-4xl font-bold -mt-1">Exclusive Energy & Electric</span>
         </div>
@@ -45,13 +46,13 @@ export default function ServiceMaintenancePage() {
           })}
           <div className="flex items-center gap-5 ml-10">
             <a href="https://www.facebook.com/exclusiveenergyinc/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <img src="/facebook.png" alt="Facebook" className="h-10 w-10 filter invert transition-transform hover:scale-110 hover:brightness-200" />
+              <Image src="/facebook.png" alt="Facebook" width={40} height={40} className="filter invert transition-transform hover:scale-110 hover:brightness-200" />
             </a>
             <a href="https://www.instagram.com/exclusive_energy_electric/reels/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <img src="/instagram.png" alt="Instagram" className="h-10 w-10 filter invert transition-transform hover:scale-110 hover:brightness-200" />
+              <Image src="/instagram.png" alt="Instagram" width={40} height={40} className="filter invert transition-transform hover:scale-110 hover:brightness-200" />
             </a>
             <a href="https://www.linkedin.com/company/exclusive-energy-inc-" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <img src="/linkedin.png" alt="LinkedIn" className="h-10 w-10 filter invert transition-transform hover:scale-110 hover:brightness-200" />
+              <Image src="/linkedin.png" alt="LinkedIn" width={40} height={40} className="filter invert transition-transform hover:scale-110 hover:brightness-200" />
             </a>
           </div>
         </div>

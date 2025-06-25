@@ -1,6 +1,8 @@
 'use client';
+
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function AboutPage() {
   const heroImages = [
@@ -17,7 +19,7 @@ export default function AboutPage() {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [heroImages.length]);
 
   return (
     <div className="flex flex-col min-h-screen bg-white text-black">
@@ -36,20 +38,24 @@ export default function AboutPage() {
         {/* Navbar Overlay */}
         <div className="absolute top-0 left-0 w-full flex items-center justify-between px-6 sm:px-16 py-6 z-20">
           <div className="flex items-center space-x-4">
-            <a href="/">
+            <Link href="/">
               <Image src="/exclusive-logo.png" alt="Logo" width={80} height={80} className="cursor-pointer" />
-            </a>
+            </Link>
             <span className="text-white text-3xl font-bold">Exclusive Energy & Electric</span>
           </div>
           <nav className="flex items-center space-x-10 text-white text-xl font-semibold">
-            {['/', '/about', '/services', '/portfolio', '/contact'].map((href, i) => (
-              <a
-                key={i}
-                href={href}
-                className="relative hover:text-blue-400 transition duration-300 cursor-pointer hover-underline-animation"
-              >
-                {href === '/' ? 'Home' : href.replace('/', '').replace(/\b\w/g, l => l.toUpperCase())}
-              </a>
+            {[
+              { href: '/', label: 'Home' },
+              { href: '/about', label: 'About' },
+              { href: '/services', label: 'Services' },
+              { href: '/portfolio', label: 'Portfolio' },
+              { href: '/contact', label: 'Contact' }
+            ].map((item, i) => (
+              <Link key={i} href={item.href} passHref>
+                <span className="relative hover:text-blue-400 transition duration-300 cursor-pointer hover-underline-animation">
+                  {item.label}
+                </span>
+              </Link>
             ))}
             <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
               <Image src="/facebook.png" alt="Facebook" width={30} height={30} className="cursor-pointer invert" />

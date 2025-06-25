@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const heroImages = [
   "/heroweb1.jpeg",
@@ -54,7 +55,7 @@ export default function ServicesPage() {
       <nav className="fixed top-0 w-full z-50 px-14 pt-6 pb-3 flex items-center justify-between bg-gradient-to-b from-black/60 to-transparent">
         <div className="flex items-center gap-6">
           <Link href="/">
-            <img src="/exclusive-logo.png" alt="Exclusive Logo" className="h-32 w-auto mt-2 cursor-pointer" />
+            <Image src="/exclusive-logo.png" alt="Exclusive Logo" width={128} height={128} className="mt-2 cursor-pointer" />
           </Link>
           <span className="text-4xl font-bold -mt-1">Exclusive Energy & Electric</span>
         </div>
@@ -62,8 +63,8 @@ export default function ServicesPage() {
           {["Home", "About Us", "Services", "Portfolio", "Contact"].map((text, index) => {
             const hrefs = ["/", "/about", "/services", "/portfolio", "/contact"];
             return (
-              <Link href={hrefs[index]} key={index}>
-                <span className="hover:text-blue-400 relative group cursor-pointer">
+              <Link href={hrefs[index]} key={index} className="hover:text-blue-400 relative group cursor-pointer">
+                <span>
                   {text}
                   <span className="absolute -top-2 left-0 w-full h-1 bg-white scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
                 </span>
@@ -72,13 +73,13 @@ export default function ServicesPage() {
           })}
           <div className="flex items-center gap-5 ml-10">
             <a href="https://www.facebook.com/exclusiveenergyinc/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <img src="/facebook.png" alt="Facebook" className="h-10 w-10 filter invert transition-transform hover:scale-110 hover:brightness-200" />
+              <Image src="/facebook.png" alt="Facebook" width={40} height={40} className="filter invert transition-transform hover:scale-110 hover:brightness-200" />
             </a>
             <a href="https://www.instagram.com/exclusive_energy_electric/reels/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <img src="/instagram.png" alt="Instagram" className="h-10 w-10 filter invert transition-transform hover:scale-110 hover:brightness-200" />
+              <Image src="/instagram.png" alt="Instagram" width={40} height={40} className="filter invert transition-transform hover:scale-110 hover:brightness-200" />
             </a>
             <a href="https://www.linkedin.com/company/exclusive-energy-inc-" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <img src="/linkedin.png" alt="LinkedIn" className="h-10 w-10 filter invert transition-transform hover:scale-110 hover:brightness-200" />
+              <Image src="/linkedin.png" alt="LinkedIn" width={40} height={40} className="filter invert transition-transform hover:scale-110 hover:brightness-200" />
             </a>
           </div>
         </div>
@@ -95,7 +96,7 @@ export default function ServicesPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 justify-center">
             {services.map((item, idx) => (
               <div key={idx} className="flex flex-col h-full rounded-lg shadow-lg overflow-hidden">
-                <img src={item.img} alt={item.title} className="w-full h-60 object-cover" />
+                <Image src={item.img} alt={item.title} width={500} height={240} className="w-full h-60 object-cover" />
                 <div className="bg-white text-black p-4 flex flex-col flex-1 justify-between">
                   <div>
                     <h3 className="text-lg font-bold text-blue-600 mb-2">{item.title}</h3>
