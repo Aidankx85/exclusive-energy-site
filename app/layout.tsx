@@ -2,7 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import MobileNavbarWrapper from "./components/MobileNavbarWrapper"; // client-safe wrapper
+import MobileNavbar from "./components/MobileNavbar"; // directly import the client component
 
 export const metadata: Metadata = {
   title: "Exclusive Energy & Electric",
@@ -17,11 +17,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen bg-white text-gray-800">
-        <div className="md:hidden">
-          <MobileNavbarWrapper />
+        {/* Mobile Navbar (Top Right Hamburger) */}
+        <div className="md:hidden fixed top-0 left-0 w-full z-50">
+          <MobileNavbar />
         </div>
 
-        <main className="flex-grow">{children}</main>
+        {/* Main Content */}
+        <main className="flex-grow pt-14">{children}</main>
 
         {/* Full Footer */}
         <footer className="bg-white text-black">

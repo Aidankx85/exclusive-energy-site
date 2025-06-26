@@ -8,33 +8,26 @@ export default function MobileNavbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-white border-b border-gray-200 px-4 py-3 shadow md:hidden">
-      <div className="flex justify-between items-center">
-        <h1 className="text-xl font-bold">Exclusive Energy & Electric</h1>
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle Menu"
-          className="text-gray-800"
-        >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
+    <div className="relative z-50">
+      <div className="flex justify-between items-center bg-white px-4 py-3 shadow-md">
+        <div className="text-lg font-bold">Exclusive Energy</div>
+        <button onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
+          {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
-      {isOpen && (
-        <ul className="mt-4 space-y-2">
-          <li>
-            <Link href="/" className="block text-gray-800 hover:text-blue-600">Home</Link>
-          </li>
-          <li>
-            <Link href="/about" className="block text-gray-800 hover:text-blue-600">About</Link>
-          </li>
-          <li>
-            <Link href="/#services" className="block text-gray-800 hover:text-blue-600">Services</Link>
-          </li>
-          <li>
-            <Link href="/#contact" className="block text-gray-800 hover:text-blue-600">Contact</Link>
-          </li>
-        </ul>
-      )}
-    </nav>
+
+      <div
+        className={`fixed top-0 right-0 w-3/4 h-full bg-white shadow-lg transition-transform duration-300 ease-in-out z-40 ${
+          isOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="flex flex-col p-6 space-y-6 mt-16">
+          <Link href="/" onClick={() => setIsOpen(false)}>Home</Link>
+          <Link href="/about" onClick={() => setIsOpen(false)}>About</Link>
+          <Link href="/#services" onClick={() => setIsOpen(false)}>Services</Link>
+          <Link href="/#contact" onClick={() => setIsOpen(false)}>Contact</Link>
+        </div>
+      </div>
+    </div>
   );
 }
