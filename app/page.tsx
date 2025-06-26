@@ -51,17 +51,20 @@ export default function Home() {
           <span className="text-4xl font-bold -mt-1">Exclusive Energy & Electric</span>
         </div>
         <div className="hidden md:flex items-center gap-12 text-xl font-semibold">
-          {["Home", "About Us", "Services", "Portfolio", "Contact"].map((text, index) => {
-            const hrefs = ["/", "/about", "/services", "/portfolio", "/contact"];
-            return (
-              <Link href={hrefs[index]} key={index}>
-                <span className="hover:text-blue-400 relative group cursor-pointer">
-                  {text}
-                  <span className="absolute -top-2 left-0 w-full h-1 bg-white scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
-                </span>
-              </Link>
-            );
-          })}
+          {[
+            { text: "Home", href: "/" },
+            { text: "About Us", href: "/about" },
+            { text: "Services", href: "/services" },
+            { text: "Portfolio", href: "/portfolio" },
+            { text: "Contact", href: "/contact" },
+          ].map(({ text, href }, index) => (
+            <Link href={href} key={index}>
+              <span className="hover:text-blue-400 relative group cursor-pointer">
+                {text}
+                <span className="absolute -top-2 left-0 w-full h-1 bg-white scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
+              </span>
+            </Link>
+          ))}
           <div className="flex items-center gap-5 ml-10">
             <a href="https://www.facebook.com/exclusiveenergyinc/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
               <Image src="/facebook.png" alt="Facebook" width={40} height={40} className="filter invert transition-transform hover:scale-110 hover:brightness-200" />
@@ -117,7 +120,7 @@ export default function Home() {
               <div className="text-center text-gray-800">
                 <Image src="/exclusive-logo.png" alt="Exclusive Logo" width={80} height={80} className="mx-auto mb-4" />
                 <h2 className="text-2xl font-bold mb-2">Thank You!</h2>
-                <p>Your estimate request has been submitted successfully. We'll be in touch shortly.</p>
+                <p>Your estimate request has been submitted successfully. We&apos;ll be in touch shortly.</p>
               </div>
             ) : (
               <>
@@ -144,28 +147,30 @@ export default function Home() {
 
       {/* What We Do Section */}
       <section className="py-20 px-6 bg-white text-gray-800">
-        <h2 className="text-3xl font-bold mb-12 text-center text-blue-600">What We Do</h2>
+        <h2 className="text-3xl font-bold mb-12 text-center">What We Do</h2>
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 justify-center">
-          {["/what1.jpeg", "/what2.jpeg", "/what3.jpg", "/what4.jpg"].map((src, idx) => (
+          {[
+            { href: "/service-details/wiring", title: "Electrical Wiring & Control", desc: "Expertly installed electrical infrastructure to support safe and reliable systems.", img: "/what1.jpeg" },
+            { href: "/service-details/efficiency", title: "Energy Efficient Solutions", desc: "Lighting and automation upgrades designed to save energy and reduce costs.", img: "/what2.jpeg" },
+            { href: "/service-details/warehouse-power", title: "Warehouse Power Solutions", desc: "High-load electrical solutions customized for safe and efficient warehouse operations.", img: "/what3.jpg" },
+            { href: "/service-details/maintenance", title: "Service & Maintenance", desc: "Scheduled inspections, maintenance, and emergency repairs for lasting system health.", img: "/what4.jpg" },
+            { href: "/service-details/warehouse-automation", title: "Warehouse Automation", desc: "Turnkey automation systems including autonomous forklifts and smart controls — engineered to streamline operations.", img: "/warehouse-robot-.mp4", video: true },
+          ].map((item, idx) => (
             <div key={idx} className="relative group overflow-hidden rounded-lg shadow-lg">
-              <Image src={src} alt="Service" width={400} height={320} className="w-full h-80 object-cover group-hover:scale-105 transition-transform" />
+              {item.video ? (
+                <video autoPlay muted loop playsInline className="w-full h-80 object-cover">
+                  <source src={item.img} type="video/mp4" />
+                </video>
+              ) : (
+                <Image src={item.img} alt={item.title} width={400} height={320} className="w-full h-80 object-cover group-hover:scale-105 transition-transform" />
+              )}
               <div className="absolute inset-0 bg-black/50 flex flex-col justify-end p-4 text-white">
-                <h3 className="text-lg font-bold">{["Electrical Wiring & Control", "Energy Efficient Solutions", "Warehouse Power Solutions", "Service & Maintenance"][idx]}</h3>
-                <p className="text-sm mb-3">{["Expertly installed electrical infrastructure to support safe and reliable systems.", "Lighting and automation upgrades designed to save energy and reduce costs.", "High-load electrical solutions customized for safe and efficient warehouse operations.", "Scheduled inspections, maintenance, and emergency repairs for lasting system health."][idx]}</p>
-                <Link href="/services" className="bg-blue-500 px-4 py-2 text-sm font-semibold rounded hover:bg-blue-600 w-fit">READ MORE</Link>
+                <h3 className="text-lg font-bold">{item.title}</h3>
+                <p className="text-sm mb-3">{item.desc}</p>
+                <Link href={item.href} className="bg-blue-500 px-4 py-2 text-sm font-semibold rounded hover:bg-blue-600 w-fit">READ MORE</Link>
               </div>
             </div>
           ))}
-          <div className="relative group overflow-hidden rounded-lg shadow-lg">
-            <video autoPlay muted loop playsInline className="w-full h-80 object-cover">
-              <source src="/warehouse-robot-.mp4" type="video/mp4" />
-            </video>
-            <div className="absolute inset-0 bg-black/50 flex flex-col justify-end p-4 text-white">
-              <h3 className="text-lg font-bold">Warehouse Automation</h3>
-              <p className="text-sm mb-3">Turnkey automation systems including autonomous forklifts and smart controls — engineered to streamline operations.</p>
-              <Link href="/service-details/warehouse-automation" className="bg-blue-500 px-4 py-2 text-sm font-semibold rounded hover:bg-blue-600 w-fit">READ MORE</Link>
-            </div>
-          </div>
         </div>
       </section>
 
