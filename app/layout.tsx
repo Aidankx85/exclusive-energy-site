@@ -2,12 +2,16 @@ import "./globals.css";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import MobileNavbar from "./components/MobileNavbar";
+import dynamic from "next/dynamic";
 
 export const metadata: Metadata = {
   title: "Exclusive Energy & Electric",
   description: "Southern California Electrical & Lighting Experts",
 };
+
+const MobileNavbar = dynamic(() => import("./components/MobileNavbar"), {
+  ssr: false,
+});
 
 export default function RootLayout({
   children,
@@ -17,7 +21,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen bg-white text-gray-800">
-        {/* Mobile Navigation Bar */}
         <div className="md:hidden">
           <MobileNavbar />
         </div>

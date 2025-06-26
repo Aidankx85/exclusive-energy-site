@@ -2,51 +2,39 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { Menu, X } from "lucide-react";
 
 export default function MobileNavbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <>
-      <nav className="md:hidden flex justify-between items-center px-6 py-4 bg-black text-white">
-        <Link href="/">
-          <Image src="/exclusive-logo.png" alt="Exclusive Logo" width={50} height={50} />
-        </Link>
+    <nav className="bg-white border-b border-gray-200 px-4 py-3 shadow md:hidden">
+      <div className="flex justify-between items-center">
+        <h1 className="text-xl font-bold">Exclusive Energy & Electric</h1>
         <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="text-white text-3xl focus:outline-none"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle Menu"
+          className="text-gray-800"
         >
-          ☰
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
-      </nav>
-
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-black text-white fixed inset-0 z-50 flex flex-col items-center justify-center space-y-6 text-xl">
-          <button
-            onClick={() => setMobileMenuOpen(false)}
-            className="absolute top-5 right-5 text-3xl"
-          >
-            ✕
-          </button>
-          <Link href="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
-          <Link href="/about" onClick={() => setMobileMenuOpen(false)}>About Us</Link>
-          <Link href="/services" onClick={() => setMobileMenuOpen(false)}>Services</Link>
-          <Link href="/portfolio" onClick={() => setMobileMenuOpen(false)}>Portfolio</Link>
-          <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
-          <div className="flex space-x-4 mt-4">
-            <a href="https://www.facebook.com/exclusiveenergyinc/" target="_blank" rel="noopener noreferrer">
-              <Image src="/facebook.png" alt="Facebook" width={30} height={30} className="filter invert" />
-            </a>
-            <a href="https://www.instagram.com/exclusive_energy_electric/reels/" target="_blank" rel="noopener noreferrer">
-              <Image src="/instagram.png" alt="Instagram" width={30} height={30} className="filter invert" />
-            </a>
-            <a href="https://www.linkedin.com/company/exclusive-energy-inc-" target="_blank" rel="noopener noreferrer">
-              <Image src="/linkedin.png" alt="LinkedIn" width={30} height={30} className="filter invert" />
-            </a>
-          </div>
-        </div>
+      </div>
+      {isOpen && (
+        <ul className="mt-4 space-y-2">
+          <li>
+            <Link href="/" className="block text-gray-800 hover:text-blue-600">Home</Link>
+          </li>
+          <li>
+            <Link href="/about" className="block text-gray-800 hover:text-blue-600">About</Link>
+          </li>
+          <li>
+            <Link href="/#services" className="block text-gray-800 hover:text-blue-600">Services</Link>
+          </li>
+          <li>
+            <Link href="/#contact" className="block text-gray-800 hover:text-blue-600">Contact</Link>
+          </li>
+        </ul>
       )}
-    </>
+    </nav>
   );
 }
