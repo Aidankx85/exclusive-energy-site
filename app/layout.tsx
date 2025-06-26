@@ -1,4 +1,3 @@
-
 import "./globals.css";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -18,7 +17,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen bg-white text-gray-800">
-       
+        {/* Mobile Navigation Bar */}
+        <div className="md:hidden">
+          <MobileNavbar />
+        </div>
 
         <main className="flex-grow">{children}</main>
 
