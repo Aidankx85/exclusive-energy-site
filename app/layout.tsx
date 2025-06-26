@@ -1,10 +1,9 @@
-"use client";
 
 import "./globals.css";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import MobileNavbar from ".apps/components/mobilenavbar";
+import MobileNavbar from "./components/MobileNavbar";
 
 export const metadata: Metadata = {
   title: "Exclusive Energy & Electric",
@@ -19,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen bg-white text-gray-800">
-        <MobileNavbar />
+       
 
         <main className="flex-grow">{children}</main>
 
