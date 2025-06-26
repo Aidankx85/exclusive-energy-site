@@ -5,11 +5,11 @@ import Link from "next/link";
 import Image from "next/image";
 
 const heroImages = [
-  "/heroweb1.jpeg",
-  "/heroweb2.jpeg",
-  "/heroweb3.jpeg",
-  "/heroweb4.jpeg",
-  "/heroweb5.jpeg",
+  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750887002/heroweb2_tryzvi.jpg",
+  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750887034/heroweb3_b7oqrn.jpg",
+  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750888911/heroweb4_hckujj.jpg",
+  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750888772/webhero2_xpj64z.jpg",
+  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750887046/heroweb5_jjw3vm.jpg"
 ];
 
 export default function Home() {
@@ -117,7 +117,7 @@ export default function Home() {
               <div className="text-center text-gray-800">
                 <Image src="/exclusive-logo.png" alt="Exclusive Logo" width={80} height={80} className="mx-auto mb-4" />
                 <h2 className="text-2xl font-bold mb-2">Thank You!</h2>
-                <p>Your estimate request has been submitted successfully. We&apos;ll be in touch shortly.</p>
+                <p>Your estimate request has been submitted successfully. We'll be in touch shortly.</p>
               </div>
             ) : (
               <>
@@ -145,6 +145,9 @@ export default function Home() {
       {/* What We Do Section */}
       <section className="py-20 px-6 bg-white text-gray-800">
         <h2 className="text-3xl font-bold mb-12 text-center">What We Do</h2>
+        <p className="max-w-4xl mx-auto text-center text-lg mb-10">
+          We deliver expert electrical contracting, custom warehouse solutions, automation, and high-efficiency upgrades — all engineered to elevate your operations.
+        </p>
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 justify-center">
           {[
             { href: "/service-details/wiring", title: "Electrical Wiring & Control", desc: "Expertly installed electrical infrastructure to support safe and reliable systems.", img: "/what1.jpeg" },
@@ -177,24 +180,24 @@ export default function Home() {
       </section>
 
       {/* Who We Are Section */}
-<section className="bg-gray-100 text-gray-800 py-20 px-6 animate-fadeIn">
-  <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center bg-white p-10 rounded-xl shadow-lg">
-    <div>
-      <Image src="/whoweare.jpeg" alt="Who We Are" width={600} height={400} className="rounded-lg shadow-md" />
-    </div>
-    <div>
-      <h2 className="text-3xl font-bold text-blue-600 mb-4">Who We Are</h2>
-      <p className="text-lg leading-relaxed">
-        <strong>Where Energy Meets Excellence.</strong><br /><br />
-        Founded as a partnership in 2007, Exclusive Energy & Electric has built a reputation for reliability and precision in commercial electrical contracting.
-        We specialize in real estate developments, retail stores, warehouse infrastructure, government buildings, religious centers, and major clients such as Amazon, Chipotle, and Toyo Tires.<br /><br />
-        Locally owned and operated in Southern California, we’ve served the region for over two decades with expertise in tenant improvements, ground-up builds, design-build projects, lighting retrofits, and energy-efficient applications.
-        Whether powering a logistics center or retrofitting a modern retail chain, we deliver excellence at every stage.<br /><br />
-        Our commitment to quality is matched by our dedication to innovation and sustainability — ensuring each project is future-ready and aligned with our clients’ evolving needs.
-      </p>
-    </div>
-  </div>
-</section>
+      <section className="bg-gray-100 text-gray-800 py-20 px-6 animate-fadeIn">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center bg-white p-10 rounded-xl shadow-lg">
+          <div>
+            <Image src="/whoweare.jpeg" alt="Who We Are" width={600} height={400} className="rounded-lg shadow-md" />
+          </div>
+          <div>
+            <h2 className="text-3xl font-bold text-blue-600 mb-4">Who We Are</h2>
+            <p className="text-lg leading-relaxed">
+              <strong>Where Energy Meets Excellence.</strong><br /><br />
+              Founded as a partnership in 2007, Exclusive Energy & Electric has built a reputation for reliability and precision in commercial electrical contracting.
+              We specialize in real estate developments, retail stores, warehouse infrastructure, government buildings, religious centers, and major clients such as Amazon, Chipotle, and Toyo Tires.<br /><br />
+              Locally owned and operated in Southern California, we’ve served the region for over two decades with expertise in tenant improvements, ground-up builds, design-build projects, lighting retrofits, and energy-efficient applications.
+              Whether powering a logistics center or retrofitting a modern retail chain, we deliver excellence at every stage.<br /><br />
+              Our commitment to quality is matched by our dedication to innovation and sustainability — ensuring each project is future-ready and aligned with our clients’ evolving needs.
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
