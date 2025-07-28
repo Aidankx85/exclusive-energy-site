@@ -23,7 +23,7 @@ const projects = [
   {
     name: "Retail / Food Chain",
     href: "/portfolio/retail",
-    img: "https://res.cloudinary.com/dtqxebti9/image/upload/f_auto/v1751402284/Road_Runnersports-1_or8mt3.heic"
+    img: "https://res.cloudinary.com/dtqxebti9/image/upload/v1753735143/IMG_3945_n42ciu.jpg"
   },
   {
     name: "Hospitality",
