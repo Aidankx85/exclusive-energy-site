@@ -68,7 +68,7 @@ export default function RootLayout({
               <div>
                 <h3 className="text-lg font-semibold mb-4">Contact</h3>
                 <div className="flex items-center mb-2">
-                  <Image src="/phonelogo.png" alt="Phone" width={20} height={20} className="mr-2" />
+                  <Image src="" alt="https://res.cloudinary.com/dtqxebti9/image/upload/v1750887142/Phonelogo_dqnrmr.png" width={20} height={20} className="mr-2" />
                   <p className="text-sm">951-299-7505</p>
                 </div>
                 <div className="flex items-center mb-2">
