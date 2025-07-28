@@ -25,7 +25,7 @@ export default function ServicesPage() {
   const services = [
     {
       img: "/what1.jpeg",
-      title: "Electrical Wiring & Control",
+      title: "Tenant Improvements", // CHANGED TITLE HERE
       desc: "Expertly installed electrical infrastructure to support safe and reliable systems.",
       href: "/service-details/wiring",
     },
@@ -33,7 +33,7 @@ export default function ServicesPage() {
       img: "/what2.jpeg",
       title: "Energy Efficient Solutions",
       desc: "Lighting and automation upgrades designed to save energy and reduce costs.",
-      href: "/service-details/efficiency",
+      href: "/service-details/efficiency", // ENSURED CORRECT LINK HERE
     },
     {
       img: "/what3.jpg",

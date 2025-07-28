@@ -11,7 +11,7 @@ const heroImages = [
   "/heroweb5.jpeg",
 ];
 
-export default function WarehousePowerPage() {
+export default function EnergyEfficiencyPage() {
   const [currentImage, setCurrentImage] = useState(0);
   useEffect(() => {
     const interval = setInterval(() => {
@@ -44,14 +44,14 @@ export default function WarehousePowerPage() {
         <div className="absolute inset-0 bg-black/40 z-0" />
         <div className="relative z-10 flex justify-center w-full">
           <div className="bg-white text-gray-800 rounded-xl shadow-xl flex flex-col md:flex-row items-center max-w-5xl w-full p-10 gap-10">
-            <Image src="/what3.jpg" alt="Warehouse Power Solutions" width={420} height={340} className="rounded-lg shadow-md object-cover w-[420px] h-[340px]" />
+            <Image src="/what2.jpeg" alt="Energy Efficient Solutions" width={420} height={340} className="rounded-lg shadow-md object-cover w-[420px] h-[340px]" />
             <div className="hidden md:block h-full w-px bg-gray-300 mx-6" />
             <div className="flex flex-col justify-center max-w-xl">
-              <h1 className="text-3xl font-bold text-blue-600 mb-4">Warehouse Power Solutions</h1>
+              <h1 className="text-3xl font-bold text-blue-600 mb-4">Energy Efficient Solutions</h1>
               <p className="text-lg mb-2">
-                Specialized high-load electrical for distribution centers, cold storage, and logistics. We deliver power you can count on for heavy equipment, conveyors, and critical systems.
+                Save money and energy with LED retrofits, advanced controls, and sustainable design. We engineer and install solutions that lower your utility bills and environmental footprint.
               </p>
-              <p className="text-base">Safe, scalable, and custom-engineered for modern warehouse operations.</p>
+              <p className="text-base">Get rebates, longer-lasting lighting, and future-ready systems with Exclusive Energy & Electric.</p>
             </div>
           </div>
         </div>
