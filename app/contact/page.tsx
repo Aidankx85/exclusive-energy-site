@@ -112,10 +112,10 @@ export default function ContactPage() {
           </div>
           <div>
             <h2 className="text-2xl font-bold mb-4 text-blue-700">Contact Details</h2>
-            <div className="flex flex-col gap-3">
-              <div className="flex items-center gap-2">
-                <Image src="/phonelogo.png" alt="Phone" width={22} height={22} />
-                <span className="font-semibold">951-299-7505</span>
+<div className="flex flex-col gap-3">
+  <div className="flex items-center gap-2">
+    <Image src="/phone.png" alt="Phone" width={22} height={22} />
+    <span className="font-semibold">951-299-7505</span>
               </div>
               <div className="flex items-center gap-2">
                 <Image src="/emaillogo.png" alt="Email" width={22} height={22} />
