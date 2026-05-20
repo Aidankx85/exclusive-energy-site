@@ -43,31 +43,63 @@ export type Project = ProjectSummary & {
 
 const fetchOpts = { next: { revalidate: 60 } };
 
+// Wrap each fetch in try/catch so a Sanity outage / bad creds / network
+// blip can't take down the marketing-site build. Pages with no data fall
+// back to empty states.
+async function safeFetch<T>(
+  label: string,
+  fn: () => Promise<T>,
+  fallback: T,
+): Promise<T> {
+  if (!client) return fallback;
+  try {
+    return await fn();
+  } catch (err) {
+    console.warn(`[sanity] ${label} failed; falling back to empty.`, err);
+    return fallback;
+  }
+}
+
 export async function getAllProjects(): Promise<ProjectSummary[]> {
-  if (!client) return [];
-  return client.fetch(allProjectsQuery, {}, fetchOpts);
+  return safeFetch(
+    "getAllProjects",
+    () => client!.fetch(allProjectsQuery, {}, fetchOpts),
+    [],
+  );
 }
 
 export async function getProjectsBySector(
   sector: string,
 ): Promise<ProjectSummary[]> {
-  if (!client) return [];
-  return client.fetch(projectsBySectorQuery, { sector }, fetchOpts);
+  return safeFetch(
+    `getProjectsBySector(${sector})`,
+    () => client!.fetch(projectsBySectorQuery, { sector }, fetchOpts),
+    [],
+  );
 }
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
-  if (!client) return null;
-  return client.fetch(projectBySlugQuery, { slug }, fetchOpts);
+  return safeFetch(
+    `getProjectBySlug(${slug})`,
+    () => client!.fetch(projectBySlugQuery, { slug }, fetchOpts),
+    null,
+  );
 }
 
 export async function getAllProjectSlugs(): Promise<
   { slug: string; sector: string }[]
 > {
-  if (!client) return [];
-  return client.fetch(allProjectSlugsQuery, {}, fetchOpts);
+  return safeFetch(
+    "getAllProjectSlugs",
+    () => client!.fetch(allProjectSlugsQuery, {}, fetchOpts),
+    [],
+  );
 }
 
 export async function getFeaturedProjects(): Promise<ProjectSummary[]> {
-  if (!client) return [];
-  return client.fetch(featuredProjectsQuery, {}, fetchOpts);
+  return safeFetch(
+    "getFeaturedProjects",
+    () => client!.fetch(featuredProjectsQuery, {}, fetchOpts),
+    [],
+  );
 }
