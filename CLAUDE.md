@@ -7,7 +7,7 @@ This file governs how Claude Code (and any other AI coding agent) operates in th
 - This is the public marketing site for **Exclusive Energy & Electric** (commercial electrical contractor, Corona, CA).
 - Stack: Next.js 15 + React 19 + Tailwind 4 + Sanity CMS.
 - The site has marketing pages, a portfolio (Sanity-driven), and an intake/estimate form.
-- The estimate form is wired to a server-side API route at `/api/estimate` which forwards to an n8n workflow (or Make.com fallback).
+- The estimate form posts to a server-side API route at `/api/estimate`. Webhook/email forwarding has been removed for now; submissions are validated server-side and logged. A delivery integration will be added back later.
 - Do not assume production access is safe.
 - Do not use real secrets unless the user manually adds them outside of chat.
 
@@ -22,15 +22,14 @@ This file governs how Claude Code (and any other AI coding agent) operates in th
 7. Never commit `.env` files or other secret files.
 8. Never push to GitHub unless the user explicitly approves.
 9. Never deploy to Vercel or any host unless the user explicitly approves.
-10. Never activate n8n workflows unless the user explicitly approves.
-11. Never send real emails, texts, or webhooks unless the user explicitly approves.
-12. Never delete files unless the user explicitly approves.
-13. Never run destructive commands unless the user explicitly approves.
-14. Never install packages unless you explain why and the user approves.
-15. Never modify Git history unless the user explicitly approves.
-16. Never access files outside this repository.
-17. Never access Desktop, Downloads, Documents, OneDrive, Google Drive, or personal folders.
-18. Never collect or request sensitive user data such as SSN, bank info, passwords, payment info, driver license info, or private documents.
+10. Never send real emails, texts, or webhooks unless the user explicitly approves.
+11. Never delete files unless the user explicitly approves.
+12. Never run destructive commands unless the user explicitly approves.
+13. Never install packages unless you explain why and the user approves.
+14. Never modify Git history unless the user explicitly approves.
+15. Never access files outside this repository.
+16. Never access Desktop, Downloads, Documents, OneDrive, Google Drive, or personal folders.
+17. Never collect or request sensitive user data such as SSN, bank info, passwords, payment info, driver license info, or private documents.
 
 ## Allowed without asking
 
@@ -51,7 +50,6 @@ This file governs how Claude Code (and any other AI coding agent) operates in th
 - Deleting, moving, or renaming files.
 - Editing config files that affect deployment.
 - Editing `package.json`.
-- Creating or changing n8n production workflow behavior.
 - Sending test emails to real addresses.
 - Calling live webhooks.
 - Connecting to external services.
@@ -63,47 +61,37 @@ This file governs how Claude Code (and any other AI coding agent) operates in th
 
 - Do not read `.env` or any env file values.
 - Do not print secrets.
-- Do not expose webhook URLs.
 - Do not push to `main`.
 - Do not deploy.
 - Do not run `rm -rf` or equivalent destructive commands.
 - Do not run commands outside the repo.
 - Do not change system permissions.
 - Do not access customer / private data.
-- Do not store real credentials in workflow JSON, source code, README, or chat.
+- Do not store real credentials in source code, README, or chat.
 
 ## Environment variable naming
 
 Use environment variable **names** only. Private values for this project should be referenced like:
 
-- `N8N_WEBHOOK_URL` — server-side, intake form forwarder.
-- `MAKE_WEBHOOK_URL` — server-side, legacy fallback during n8n migration.
-- `RESEND_API_KEY` — only inside n8n credentials, never in this repo.
-- `OPENAI_API_KEY` — only inside n8n credentials, never in this repo.
-- `NEXT_PUBLIC_SANITY_PROJECT_ID` / `NEXT_PUBLIC_SANITY_DATASET` — intentionally public (Sanity convention).
+- `NEXT_PUBLIC_SANITY_PROJECT_ID` / `NEXT_PUBLIC_SANITY_DATASET` — intentionally public (Sanity convention). The site is built to tolerate these being unset (Sanity-driven sections degrade to empty), but must be set in Vercel for the portfolio CMS pipeline to render content.
 
 If a feature needs a secret, tell the user:
 1. The variable name needed.
-2. Where they should add it manually (`.env.local`, Vercel env vars, n8n credentials, etc.).
+2. Where they should add it manually (`.env.local`, Vercel env vars, etc.).
 3. Do **not** ask them to paste the secret into chat.
 
-## n8n rules
+## Intake form rules
 
-- Build n8n integrations in test mode first.
-- Do not activate workflows automatically.
-- Do not store production credentials in exported workflow files (use placeholder strings like `YOUR_OPENAI_API_KEY_HERE`).
-- Do not hardcode webhook URLs in client-side code if avoidable.
-- Preferred structure: **Frontend form → Next.js API route (`/api/estimate`) → n8n webhook.**
 - The intake form may collect only: name, email, phone, business name, project address, project notes, project type, role, timeline.
 - Do not collect payment info, SSN, bank info, passwords, or private documents.
+- A future delivery integration (email, CRM, or webhook) should run server-side from `/api/estimate`, never directly from the browser.
 
 ## Next.js security rules
 
 - Private secrets stay server-side only.
 - Do not expose server secrets in React components.
 - Do not use `NEXT_PUBLIC_` unless the value is intentionally public.
-- The intake form must POST to `/api/estimate`, which reads `N8N_WEBHOOK_URL` from environment variables and forwards.
-- Validate / sanitize form input before forwarding it.
+- The intake form must POST to `/api/estimate` (server-side). Validate / sanitize form input before processing it.
 - Apply spam protection (honeypot, time-on-form check, optional Turnstile/captcha).
 
 ## Git safety

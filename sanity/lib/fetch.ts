@@ -44,25 +44,30 @@ export type Project = ProjectSummary & {
 const fetchOpts = { next: { revalidate: 60 } };
 
 export async function getAllProjects(): Promise<ProjectSummary[]> {
+  if (!client) return [];
   return client.fetch(allProjectsQuery, {}, fetchOpts);
 }
 
 export async function getProjectsBySector(
   sector: string,
 ): Promise<ProjectSummary[]> {
+  if (!client) return [];
   return client.fetch(projectsBySectorQuery, { sector }, fetchOpts);
 }
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
+  if (!client) return null;
   return client.fetch(projectBySlugQuery, { slug }, fetchOpts);
 }
 
 export async function getAllProjectSlugs(): Promise<
   { slug: string; sector: string }[]
 > {
+  if (!client) return [];
   return client.fetch(allProjectSlugsQuery, {}, fetchOpts);
 }
 
 export async function getFeaturedProjects(): Promise<ProjectSummary[]> {
+  if (!client) return [];
   return client.fetch(featuredProjectsQuery, {}, fetchOpts);
 }

@@ -24,7 +24,6 @@ export async function POST(request: Request) {
 
   // Spam check 1 — honeypot. Real humans never fill this.
   if (body.company_website) {
-    // Pretend success so the bot doesn't retry.
     return NextResponse.json({ success: true });
   }
 
@@ -61,35 +60,8 @@ export async function POST(request: Request) {
     sourceUrl: request.headers.get("referer") || null,
   };
 
-  const webhookUrl = process.env.N8N_WEBHOOK_URL || process.env.MAKE_WEBHOOK_URL;
-  if (!webhookUrl) {
-    console.warn(
-      "[estimate] No webhook URL configured — submission accepted but not forwarded.",
-      payload,
-    );
-    return NextResponse.json({ success: true });
-  }
-
-  try {
-    const res = await fetch(webhookUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    if (!res.ok) {
-      console.error("[estimate] Webhook returned non-OK", res.status);
-      return NextResponse.json(
-        { error: "Could not deliver your request. Please call 951-299-7505." },
-        { status: 502 },
-      );
-    }
-  } catch (err) {
-    console.error("[estimate] Webhook fetch failed", err);
-    return NextResponse.json(
-      { error: "Could not deliver your request. Please call 951-299-7505." },
-      { status: 502 },
-    );
-  }
+  // TODO: wire up email/CRM delivery. For now, log server-side and accept.
+  console.log("[estimate] New submission", payload);
 
   return NextResponse.json({ success: true });
 }

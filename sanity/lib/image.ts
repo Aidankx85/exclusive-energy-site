@@ -1,11 +1,18 @@
 import createImageUrlBuilder from '@sanity/image-url'
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import type { SanityImageSource } from '@sanity/image-url/lib/types/types'
 
-import { dataset, projectId } from '../env'
+import { dataset, isSanityConfigured, projectId } from '../env'
 
-// https://www.sanity.io/docs/image-url
-const builder = createImageUrlBuilder({ projectId, dataset })
+const builder = isSanityConfigured
+  ? createImageUrlBuilder({ projectId, dataset })
+  : null
 
 export const urlFor = (source: SanityImageSource) => {
+  if (!builder) {
+    const noop: any = new Proxy(() => noop, {
+      get: (_target, prop) => (prop === 'url' ? () => '' : () => noop),
+    })
+    return noop
+  }
   return builder.image(source)
 }
