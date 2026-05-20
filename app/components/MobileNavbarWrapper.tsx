@@ -39,10 +39,11 @@ export default function MobileNavbarWrapper() {
             className="fixed top-0 right-0 w-3/4 h-full bg-white shadow-lg z-50 p-6"
           >
             <ul className="space-y-6 text-lg">
+              <li><Link href="/" onClick={() => setIsOpen(false)}>Home</Link></li>
               <li><Link href="/about" onClick={() => setIsOpen(false)}>About</Link></li>
-              <li><Link href="/#services" onClick={() => setIsOpen(false)}>Services</Link></li>
-              <li><Link href="/#portfolio" onClick={() => setIsOpen(false)}>Portfolio</Link></li>
-              <li><Link href="/#contact" onClick={() => setIsOpen(false)}>Contact</Link></li>
+              <li><Link href="/services" onClick={() => setIsOpen(false)}>Services</Link></li>
+              <li><Link href="/portfolio" onClick={() => setIsOpen(false)}>Portfolio</Link></li>
+              <li><Link href="/contact" onClick={() => setIsOpen(false)}>Contact</Link></li>
             </ul>
           </motion.div>
         )}

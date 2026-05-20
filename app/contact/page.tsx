@@ -1,44 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
-const heroImages = [
-  "/heroweb1.jpeg",
-  "/heroweb2.jpeg",
-  "/heroweb3.jpeg",
-  "/heroweb4.jpeg",
-  "/heroweb5.jpeg",
-];
+import RotatingHero from "../components/RotatingHero";
+import EstimateForm from "../components/EstimateForm";
+import { HERO_IMAGES } from "../lib/site";
 
 export default function ContactPage() {
-  const [currentImage, setCurrentImage] = useState(0);
-  const [formSubmitted, setFormSubmitted] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % heroImages.length);
-    }, 8000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData.entries());
-
-    // Add your webhook here if needed
-    await fetch("https://hook.us2.make.com/mhxzxo778kyo46myicrssh541sbs5tvt", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    setFormSubmitted(true);
-  };
 
   return (
     <div className="flex flex-col min-h-screen bg-white text-white">
@@ -80,12 +48,8 @@ export default function ContactPage() {
       </nav>
 
       {/* Hero Section */}
-      <section
-        className="h-[50vh] bg-cover bg-center flex flex-col justify-center items-center px-10 transition-all duration-1000 ease-in-out relative pt-32"
-        style={{ backgroundImage: `url('${heroImages[currentImage]}')` }}
-      >
-        <div className="absolute inset-0 bg-black/40 z-0" />
-        <div className="relative z-10 flex flex-col items-center">
+      <RotatingHero images={HERO_IMAGES} className="h-[50vh]" overlayClassName="bg-black/40">
+        <div className="flex flex-col justify-center items-center h-full px-10 pt-32">
           <h1 className="text-5xl font-extrabold mb-4 text-white tracking-wider text-center drop-shadow-lg">
             Contact Us
           </h1>
@@ -93,7 +57,7 @@ export default function ContactPage() {
             Let’s power your next project. Call, email, or use our form below.
           </p>
         </div>
-      </section>
+      </RotatingHero>
 
       {/* Main Section */}
       <section className="bg-white py-20 px-4 flex flex-col lg:flex-row gap-10 max-w-7xl mx-auto w-full text-gray-900">
@@ -134,49 +98,8 @@ export default function ContactPage() {
         </div>
         {/* Right: Contact Form */}
         <div className="flex-1 flex flex-col justify-center bg-white rounded-xl shadow-xl p-8">
-          <h2 className="text-2xl font-bold mb-4 text-blue-700">Send a Message</h2>
-          {formSubmitted ? (
-            <div className="flex flex-col items-center justify-center h-full">
-              <Image src="/exclusive-logo.png" alt="Exclusive Logo" width={80} height={80} className="mb-4" />
-              <h3 className="text-xl font-semibold text-green-700 mb-2">Thank you!</h3>
-              <p className="text-gray-700 text-center">We received your message and will get back to you soon.</p>
-            </div>
-          ) : (
-            <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-              <input
-                name="fullName"
-                type="text"
-                placeholder="Full Name"
-                className="border rounded px-4 py-2 text-black"
-                required
-              />
-              <input
-                name="email"
-                type="email"
-                placeholder="Email Address"
-                className="border rounded px-4 py-2 text-black"
-                required
-              />
-              <input
-                name="phone"
-                type="tel"
-                placeholder="Phone Number"
-                className="border rounded px-4 py-2 text-black"
-              />
-              <textarea
-                name="message"
-                placeholder="How can we help you?"
-                className="border rounded px-4 py-2 text-black min-h-[120px]"
-                required
-              />
-              <button
-                type="submit"
-                className="bg-blue-600 text-white font-semibold px-6 py-3 rounded hover:bg-blue-700 transition"
-              >
-                Send Message
-              </button>
-            </form>
-          )}
+          <h2 className="text-2xl font-bold mb-4 text-blue-700">Request an Estimate</h2>
+          <EstimateForm variant="inline" />
         </div>
       </section>
     </div>

@@ -3,43 +3,70 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { cld } from "../lib/cloudinary";
+
+const HERO_IMAGE = cld(
+  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750887002/heroweb2_tryzvi.jpg",
+  { width: 1920 },
+);
 
 const projects = [
   {
     name: "Government",
-    href: "/portfolio/goverment", // your route spelling!
-    img: "https://res.cloudinary.com/dtqxebti9/image/upload/f_auto/v1751398014/Firesttion_8_1_1_w4h2go.jpg"
+    href: "/portfolio/goverment",
+    img: cld(
+      "https://res.cloudinary.com/dtqxebti9/image/upload/v1751398014/Firesttion_8_1_1_w4h2go.jpg",
+      { width: 800 },
+    ),
   },
   {
     name: "Warehouse",
     href: "/portfolio/warehouse",
-    img: "https://res.cloudinary.com/dtqxebti9/image/upload/f_auto/v1751401471/Ca_Greenhouse-1_ffz9cb.heic"
+    img: cld(
+      "https://res.cloudinary.com/dtqxebti9/image/upload/v1751401471/Ca_Greenhouse-1_ffz9cb.heic",
+      { width: 800 },
+    ),
   },
   {
     name: "Offices",
     href: "/portfolio/offices",
-    img: "https://res.cloudinary.com/dtqxebti9/image/upload/f_auto/v1751402017/Sysparo-1_z7iuxc.jpg"
+    img: cld(
+      "https://res.cloudinary.com/dtqxebti9/image/upload/v1751402017/Sysparo-1_z7iuxc.jpg",
+      { width: 800 },
+    ),
   },
   {
     name: "Retail / Food Chain",
     href: "/portfolio/retail",
-    img: "https://res.cloudinary.com/dtqxebti9/image/upload/v1753735143/IMG_3945_n42ciu.jpg"
+    img: cld(
+      "https://res.cloudinary.com/dtqxebti9/image/upload/v1753735143/IMG_3945_n42ciu.jpg",
+      { width: 800 },
+    ),
   },
   {
     name: "Hospitality",
     href: "/portfolio/hospitality",
-    img: "https://res.cloudinary.com/dtqxebti9/image/upload/f_auto/v1751403403/Hyatt_Irvine_-_1_prjoof.heic"
+    img: cld(
+      "https://res.cloudinary.com/dtqxebti9/image/upload/v1751403403/Hyatt_Irvine_-_1_prjoof.heic",
+      { width: 800 },
+    ),
   },
   {
     name: "EV Charging Stations",
     href: "/portfolio/evcharge",
-    img: "https://res.cloudinary.com/dtqxebti9/image/upload/f_auto/v1751402873/Toyo_Ev_GOAT_chargers-1_hs2njc.jpg"
+    img: cld(
+      "https://res.cloudinary.com/dtqxebti9/image/upload/v1751402873/Toyo_Ev_GOAT_chargers-1_hs2njc.jpg",
+      { width: 800 },
+    ),
   },
   {
     name: "Miscellaneous",
     href: "/portfolio/miscellaneous",
-    img: "https://res.cloudinary.com/dtqxebti9/image/upload/f_auto/v1751402525/Rexford_ps3tuq.heic"
-  }
+    img: cld(
+      "https://res.cloudinary.com/dtqxebti9/image/upload/v1751402525/Rexford_ps3tuq.heic",
+      { width: 800 },
+    ),
+  },
 ];
 
 export default function PortfolioPage() {
@@ -87,12 +114,15 @@ export default function PortfolioPage() {
       </motion.nav>
 
       {/* Hero & Projects */}
-      <section
-        className="min-h-screen bg-cover bg-center flex flex-col justify-start items-center px-10 pt-44 pb-20"
-        style={{
-          backgroundImage: `url('https://res.cloudinary.com/dtqxebti9/image/upload/v1750887002/heroweb2_tryzvi.jpg')`
-        }}
-      >
+      <section className="relative min-h-screen flex flex-col justify-start items-center px-10 pt-44 pb-20 overflow-hidden">
+        <Image
+          src={HERO_IMAGE}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover z-0"
+        />
         <div className="absolute inset-0 bg-black/60 z-0" />
         <motion.h1
           initial={{ opacity: 0, y: 40 }}

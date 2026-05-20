@@ -1,26 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
-const heroImages = [
-  "/heroweb1.jpeg",
-  "/heroweb2.jpeg",
-  "/heroweb3.jpeg",
-  "/heroweb4.jpeg",
-  "/heroweb5.jpeg",
-];
+import RotatingHero from "../components/RotatingHero";
+import { HERO_IMAGES } from "../lib/site";
 
 export default function ServicesPage() {
-  const [currentImage, setCurrentImage] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % heroImages.length);
-    }, 8000);
-    return () => clearInterval(interval);
-  }, []);
 
   const services = [
     {
@@ -92,39 +77,47 @@ export default function ServicesPage() {
       </nav>
 
       {/* Hero Section with Services Cards */}
-      <section
-        className="min-h-screen bg-cover bg-center flex flex-col justify-center items-center px-10 transition-all duration-1000 ease-in-out relative pt-48"
-        style={{ backgroundImage: `url('${heroImages[currentImage]}')` }}
-      >
-        <div className="absolute inset-0 bg-black/40 z-0" />
-        <div className="relative z-10 animate-fadeInUp w-full max-w-7xl bg-white/10 backdrop-blur-md pt-10 pb-20 px-6 rounded-2xl">
-          <h1 className="text-5xl font-bold mb-12 text-center tracking-wider text-white">Our Services</h1>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 justify-center">
-            {services.map((item, idx) => (
-              <div key={idx} className="flex flex-col h-full rounded-lg shadow-lg overflow-hidden">
-                {item.href === "/service-details/warehouse-automation" ? (
-                  <video autoPlay muted loop playsInline className="w-full h-60 object-cover">
-                    <source src="/warehouse-robot-.mp4" type="video/mp4" />
-                  </video>
-                ) : (
-                  <Image src={item.img} alt={item.title} width={500} height={240} className="w-full h-60 object-cover" />
-                )}
-                <div className="bg-white text-black p-4 flex flex-col flex-1 justify-between">
-                  <div>
-                    <h3 className="text-lg font-bold text-blue-600 mb-2">{item.title}</h3>
-                    <p className="text-sm mb-4">{item.desc}</p>
+      <RotatingHero images={HERO_IMAGES} className="min-h-screen" overlayClassName="bg-black/40">
+        <div className="flex flex-col justify-center items-center px-10 pt-48 pb-20 min-h-screen">
+          <div className="w-full max-w-7xl bg-white/10 backdrop-blur-md pt-10 pb-20 px-6 rounded-2xl">
+            <h1 className="text-5xl font-bold mb-12 text-center tracking-wider text-white">Our Services</h1>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 justify-center">
+              {services.map((item, idx) => (
+                <div key={idx} className="group flex flex-col h-full rounded-lg shadow-lg overflow-hidden bg-white transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-400/30">
+                  <div className="overflow-hidden">
+                    {item.href === "/service-details/warehouse-automation" ? (
+                      <video
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        preload="metadata"
+                        poster="/warehouse-robot-cover.jpg"
+                        className="w-full h-60 object-cover transition-transform duration-500 group-hover:scale-105"
+                      >
+                        <source src="/warehouse-robot-.mp4" type="video/mp4" />
+                      </video>
+                    ) : (
+                      <Image src={item.img} alt={item.title} width={500} height={240} sizes="(max-width: 600px) 90vw, (max-width: 1200px) 30vw, 240px" className="w-full h-60 object-cover transition-transform duration-500 group-hover:scale-105" />
+                    )}
                   </div>
-                  <Link href={item.href}>
-                    <span className="bg-blue-600 text-white px-4 py-2 text-sm font-semibold rounded hover:bg-blue-700 text-center block w-fit cursor-pointer">
-                      READ MORE
-                    </span>
-                  </Link>
+                  <div className="bg-white text-black p-4 flex flex-col flex-1 justify-between">
+                    <div>
+                      <h3 className="text-lg font-bold text-blue-600 mb-2">{item.title}</h3>
+                      <p className="text-sm mb-4">{item.desc}</p>
+                    </div>
+                    <Link href={item.href}>
+                      <span className="bg-blue-600 text-white px-4 py-2 text-sm font-semibold rounded hover:bg-blue-700 text-center block w-fit cursor-pointer">
+                        READ MORE
+                      </span>
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-      </section>
+      </RotatingHero>
     </div>
   );
 }

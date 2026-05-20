@@ -1,27 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-
-const heroImages = [
-  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750887002/heroweb2_tryzvi.jpg",
-  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750887034/heroweb3_b7oqrn.jpg",
-  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750888911/heroweb4_hckujj.jpg",
-  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750888772/webhero2_xpj64z.jpg",
-  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750887046/heroweb5_jjw3vm.jpg"
-];
+import RotatingHero from "../components/RotatingHero";
+import { cld } from "../lib/cloudinary";
+import { HERO_IMAGES } from "../lib/site";
 
 export default function AboutPage() {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length);
-    }, 8000);
-    return () => clearInterval(interval);
-  }, []);
 
   const navLinks = [
     { text: "Home", href: "/" },
@@ -70,15 +56,7 @@ export default function AboutPage() {
       </motion.nav>
 
       {/* Hero Section */}
-      <section className="relative w-full h-[100vh]">
-        <Image
-          src={heroImages[currentImageIndex]}
-          alt="Hero Background"
-          fill
-          className="object-cover brightness-70 transition-opacity duration-1000 z-0"
-          priority
-        />
-
+      <RotatingHero images={HERO_IMAGES} className="h-[100vh]" overlayClassName="bg-black/30">
         {/* Who We Are Box Centered Over Hero */}
         <motion.section
           initial={{ opacity: 0, y: 60 }}
@@ -100,9 +78,10 @@ export default function AboutPage() {
               />
               {/* Foreground About Team Picture */}
               <Image
-                src="https://res.cloudinary.com/dtqxebti9/image/upload/v1751326764/ChatGPT_Image_Jun_30_2025_04_38_52_PM_rraggs.png"
+                src={cld("https://res.cloudinary.com/dtqxebti9/image/upload/v1751326764/ChatGPT_Image_Jun_30_2025_04_38_52_PM_rraggs.png", { width: 800 })}
                 alt="About Us Team"
                 fill
+                sizes="(max-width: 768px) 350px, 350px"
                 className="rounded-lg object-cover shadow-md z-10"
                 priority
               />
@@ -119,7 +98,74 @@ export default function AboutPage() {
             </div>
           </div>
         </motion.section>
-      </section>
+      </RotatingHero>
+
+      {/* Leadership */}
+      <motion.section
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="bg-white py-24 px-6"
+      >
+        <div className="max-w-6xl mx-auto">
+          <p className="text-xs uppercase tracking-[0.25em] text-blue-600 font-semibold text-center mb-3">
+            Leadership
+          </p>
+          <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-4">
+            The People Behind the Power
+          </h2>
+          <p className="text-center text-gray-500 max-w-2xl mx-auto mb-16">
+            Nearly two decades of building Southern California — led by partners who started in the field.
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-20">
+            {/* CEO */}
+            <div className="text-center">
+              <div className="relative w-56 h-56 mx-auto mb-6 rounded-full overflow-hidden bg-gray-100 ring-4 ring-blue-50 shadow-lg">
+                {/* TODO: swap to a real photo at /public/leadership/ceo.jpg (or wherever you put it) */}
+                <Image
+                  src="/exclusive-logo.png"
+                  alt="CEO"
+                  fill
+                  sizes="224px"
+                  className="object-contain p-10 opacity-40"
+                />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-1">[CEO Name]</h3>
+              <p className="text-blue-600 font-semibold uppercase tracking-wider text-sm mb-4">
+                Chief Executive Officer
+              </p>
+              <p className="text-gray-600 leading-relaxed max-w-md mx-auto">
+                [Short bio — 2 to 3 sentences. Background, role at the company,
+                and what clients can expect from working with him.]
+              </p>
+            </div>
+
+            {/* President */}
+            <div className="text-center">
+              <div className="relative w-56 h-56 mx-auto mb-6 rounded-full overflow-hidden bg-gray-100 ring-4 ring-blue-50 shadow-lg">
+                {/* TODO: swap to a real photo at /public/leadership/president.jpg */}
+                <Image
+                  src="/exclusive-logo.png"
+                  alt="President"
+                  fill
+                  sizes="224px"
+                  className="object-contain p-10 opacity-40"
+                />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-1">[President Name]</h3>
+              <p className="text-blue-600 font-semibold uppercase tracking-wider text-sm mb-4">
+                President
+              </p>
+              <p className="text-gray-600 leading-relaxed max-w-md mx-auto">
+                [Short bio — 2 to 3 sentences. Same template.]
+              </p>
+            </div>
+          </div>
+        </div>
+      </motion.section>
+
       {/* Footer will automatically stay below */}
     </div>
   );

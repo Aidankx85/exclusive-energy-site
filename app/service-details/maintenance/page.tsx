@@ -1,24 +1,17 @@
 "use client";
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import RotatingHero from "../../components/RotatingHero";
 
 const heroImages = [
-  "/heroweb1.jpeg",
-  "/heroweb2.jpeg",
-  "/heroweb3.jpeg",
-  "/heroweb4.jpeg",
-  "/heroweb5.jpeg",
+  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750887002/heroweb2_tryzvi.jpg",
+  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750887034/heroweb3_b7oqrn.jpg",
+  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750888911/heroweb4_hckujj.jpg",
+  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750888772/webhero2_xpj64z.jpg",
+  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750887046/heroweb5_jjw3vm.jpg",
 ];
 
 export default function ServiceMaintenancePage() {
-  const [currentImage, setCurrentImage] = useState(0);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % heroImages.length);
-    }, 8000);
-    return () => clearInterval(interval);
-  }, []);
   return (
     <div className="flex flex-col min-h-screen bg-white text-white">
       {/* Navigation */}
@@ -39,10 +32,9 @@ export default function ServiceMaintenancePage() {
         </div>
       </nav>
       {/* Hero Section */}
-      <section className="min-h-screen bg-cover bg-center flex flex-col justify-center items-center px-4 md:px-10 transition-all duration-1000 ease-in-out relative pt-48"
-        style={{ backgroundImage: `url('${heroImages[currentImage]}')` }}>
-        <div className="absolute inset-0 bg-black/40 z-0" />
-        <div className="relative z-10 flex justify-center w-full">
+      <RotatingHero images={heroImages} className="min-h-screen" overlayClassName="bg-black/40">
+        <div className="h-full flex flex-col justify-center items-center px-4 md:px-10 pt-48">
+        <div className="flex justify-center w-full">
           <div className="bg-white text-gray-800 rounded-xl shadow-xl flex flex-col md:flex-row items-center max-w-5xl w-full p-10 gap-10">
             <Image src="/what4.jpg" alt="Service & Maintenance" width={420} height={340} className="rounded-lg shadow-md object-cover w-[420px] h-[340px]" />
             <div className="hidden md:block h-full w-px bg-gray-300 mx-6" />
@@ -55,7 +47,8 @@ export default function ServiceMaintenancePage() {
             </div>
           </div>
         </div>
-      </section>
+        </div>
+      </RotatingHero>
     </div>
   );
 }

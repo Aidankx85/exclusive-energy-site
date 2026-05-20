@@ -4,19 +4,21 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import EstimateForm from "./components/EstimateForm";
+import { SECTORS } from "./portfolio/sectors";
+import { cld } from "./lib/cloudinary";
 
 const heroImages = [
-  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750887002/heroweb2_tryzvi.jpg",
-  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750887034/heroweb3_b7oqrn.jpg",
-  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750888911/heroweb4_hckujj.jpg",
-  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750888772/webhero2_xpj64z.jpg",
-  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750887046/heroweb5_jjw3vm.jpg"
+  "https://res.cloudinary.com/dtqxebti9/image/upload/f_auto,q_auto,w_1920/v1750887002/heroweb2_tryzvi.jpg",
+  "https://res.cloudinary.com/dtqxebti9/image/upload/f_auto,q_auto,w_1920/v1750887034/heroweb3_b7oqrn.jpg",
+  "https://res.cloudinary.com/dtqxebti9/image/upload/f_auto,q_auto,w_1920/v1750888911/heroweb4_hckujj.jpg",
+  "https://res.cloudinary.com/dtqxebti9/image/upload/f_auto,q_auto,w_1920/v1750888772/webhero2_xpj64z.jpg",
+  "https://res.cloudinary.com/dtqxebti9/image/upload/f_auto,q_auto,w_1920/v1750887046/heroweb5_jjw3vm.jpg",
 ];
 
 export default function Home() {
   const [currentImage, setCurrentImage] = useState(0);
   const [showModal, setShowModal] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -24,23 +26,6 @@ export default function Home() {
     }, 8000);
     return () => clearInterval(interval);
   }, []);
-
-  // Handle form submit for Make.com webhook
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData.entries());
-
-    await fetch("https://hook.us2.make.com/mhxzxo778kyo46myicrssh541sbs5tvt", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    setFormSubmitted(true);
-  };
 
   const navLinks = [
     { text: "Home", href: "/" },
@@ -89,10 +74,18 @@ export default function Home() {
       </motion.nav>
 
       {/* Hero Section */}
-      <section
-        className="h-screen bg-cover bg-center flex items-center justify-start px-10 transition-all duration-1000 ease-in-out relative"
-        style={{ backgroundImage: `url('${heroImages[currentImage]}')` }}
-      >
+      <section className="h-screen flex items-center justify-start px-10 relative overflow-hidden">
+        {heroImages.map((src, i) => (
+          <Image
+            key={src}
+            src={src}
+            alt=""
+            fill
+            priority={i === 0}
+            sizes="100vw"
+            className={`object-cover transition-opacity duration-1000 ease-in-out ${i === currentImage ? "opacity-100" : "opacity-0"}`}
+          />
+        ))}
         <div className="absolute inset-0 bg-black/40 z-0" />
         <motion.div
           className="max-w-2xl relative z-10"
@@ -105,60 +98,121 @@ export default function Home() {
             Where Energy Meets Excellence.<br />
             
           </h1>
-              <p className="text-lg mb-6 font-normal text-white max-w-md">
-      Proudly serving Southern California for over 20 years with unmatched efficiency and care.
+          <p className="text-lg mb-3 font-normal text-white max-w-md">
+            Proudly serving Southern California for over 20 years with unmatched efficiency and care.
+          </p>
+          <p className="text-sm text-white/80 mb-6 font-medium tracking-wide">
+            License #902374 · ABC Member · Licensed &amp; Insured
           </p>
           <button
             className="bg-blue-600 text-white px-6 py-3 rounded font-semibold hover:bg-blue-700 transition"
             onClick={() => setShowModal(true)}
           >
-            Get Estimate
+            Get a Free Estimate
           </button>
         </motion.div>
       </section>
 
       {/* MODAL POP-UP FORM */}
       {showModal && (
-        <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center">
-          <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-xl relative">
+        <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-2xl relative my-auto">
             <button
-              onClick={() => {
-                setShowModal(false);
-                setFormSubmitted(false);
-              }}
+              onClick={() => setShowModal(false)}
               className="absolute top-3 right-4 text-2xl text-gray-600 hover:text-red-600"
               aria-label="Close"
             >
               &times;
             </button>
-            {formSubmitted ? (
-              <div className="text-center text-gray-800">
-                <Image src="/exclusive-logo.png" alt="Exclusive Logo" width={80} height={80} className="mx-auto mb-4" />
-                <h2 className="text-2xl font-bold mb-2">Thank You!</h2>
-                <p>Your estimate request has been submitted successfully.<br />We&apos;ll be in touch shortly.</p>
-              </div>
-            ) : (
-              <>
-                <div className="flex justify-center mb-4">
-                  <Image src="/exclusive-logo.png" alt="Exclusive Logo" width={80} height={80} />
-                </div>
-                <h2 className="text-2xl font-bold mb-4 text-gray-800 text-center">Request an Estimate</h2>
-                <form className="space-y-4" onSubmit={handleSubmit}>
-                  <input name="fullName" type="text" placeholder="Full Name" className="w-full border px-4 py-2 rounded text-black" required />
-                  <input name="email" type="email" placeholder="Email Address" className="w-full border px-4 py-2 rounded text-black" required />
-                  <input name="phone" type="tel" placeholder="Phone Number" className="w-full border px-4 py-2 rounded text-black" required />
-                  <input name="businessName" type="text" placeholder="Business Name" className="w-full border px-4 py-2 rounded text-black" />
-                  <input name="address" type="text" placeholder="Project Address" className="w-full border px-4 py-2 rounded text-black" required />
-                  <textarea name="notes" placeholder="Describe your project needs..." className="w-full border px-4 py-2 rounded text-black h-28" required />
-                  <button type="submit" className="w-full bg-blue-600 text-white px-6 py-3 rounded font-semibold hover:bg-blue-700 transition">
-                    Submit Request
-                  </button>
-                </form>
-              </>
-            )}
+            <div className="flex justify-center mb-2">
+              <Image src="/exclusive-logo.png" alt="Exclusive Logo" width={80} height={80} />
+            </div>
+            <EstimateForm variant="modal" />
           </div>
         </div>
       )}
+
+      {/* Buildings We've Powered */}
+      <section className="bg-zinc-50 py-12 border-y border-zinc-200 text-zinc-700">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <p className="text-xs uppercase tracking-[0.2em] text-zinc-500 font-semibold mb-6">
+            Buildings We&apos;ve Powered
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-4 mb-4">
+            <span className="text-2xl md:text-3xl font-bold">Amazon</span>
+            <span className="text-2xl md:text-3xl font-bold">Chipotle</span>
+            <span className="text-2xl md:text-3xl font-bold">Hyatt</span>
+            <span className="text-2xl md:text-3xl font-bold">Toyo Tires</span>
+          </div>
+          <p className="text-sm text-zinc-500 mb-6 max-w-2xl mx-auto">
+            As a trusted electrical subcontractor to leading general contractors across Southern California.
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-2 text-sm text-zinc-600">
+            <span className="font-semibold">License #902374</span>
+            <span aria-hidden>·</span>
+            <span>ABC Member</span>
+            <span aria-hidden>·</span>
+            <span>Licensed &amp; Insured</span>
+            <span aria-hidden>·</span>
+            <span>Founded 2007</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Sectors We Power */}
+      <motion.section
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="py-20 px-6 bg-white text-gray-800"
+      >
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold mb-3 text-center">Sectors We Power</h2>
+          <p className="text-center text-gray-500 mb-12 max-w-2xl mx-auto">
+            Electrical infrastructure, lighting, and service for commercial buildings across Southern California.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {SECTORS.map((sector, idx) => (
+              <motion.div
+                key={sector.slug}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: idx * 0.06 }}
+                viewport={{ once: true }}
+              >
+                <Link
+                  href={`/portfolio/${sector.slug}`}
+                  className="group relative block overflow-hidden rounded-lg shadow-lg aspect-[4/3]"
+                >
+                  <Image
+                    src={cld(sector.coverImage, { width: 800 })}
+                    alt={sector.title}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/0" />
+                  <div className="absolute inset-x-0 bottom-0 p-5 text-white">
+                    <h3 className="text-xl font-bold tracking-wide">{sector.title}</h3>
+                    <span className="mt-1 inline-flex items-center text-sm opacity-90 transition-all group-hover:translate-x-1 group-hover:opacity-100">
+                      View work &rarr;
+                    </span>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+          <div className="text-center mt-12">
+            <Link
+              href="/portfolio"
+              className="inline-block bg-blue-600 text-white px-8 py-3 rounded font-semibold hover:bg-blue-700 transition"
+            >
+              See full portfolio
+            </Link>
+          </div>
+        </div>
+      </motion.section>
 
       {/* What We Do */}
 <motion.section
@@ -168,7 +222,7 @@ export default function Home() {
   viewport={{ once: true }}
   className="py-20 px-6 bg-white text-gray-800"
 >
-  <h2 className="text-3xl font-bold mb-12 text-center">What We Do</h2>
+  <h2 className="text-3xl font-bold mb-12 text-center">Our Services</h2>
   <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 justify-center">
     {/* Tenant Improvements card */}
 <motion.div
@@ -184,7 +238,7 @@ export default function Home() {
     <p className="text-sm mb-3">
       Complete buildouts and upgrades for offices, warehouses, and retail—delivered on time and on budget.
     </p>
-    <Link href="/service-details/tenant-improvements" className="bg-blue-500 px-4 py-2 text-sm font-semibold rounded hover:bg-blue-600 w-fit">READ MORE</Link>
+    <Link href="/service-details/wiring" className="bg-blue-500 px-4 py-2 text-sm font-semibold rounded hover:bg-blue-600 w-fit">READ MORE</Link>
   </div>
 </motion.div>
 
@@ -225,7 +279,15 @@ export default function Home() {
         viewport={{ once: true }}
       >
         {item.video ? (
-          <video autoPlay muted loop playsInline className="w-full h-80 object-cover">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="/warehouse-robot-cover.jpg"
+            className="w-full h-80 object-cover"
+          >
             <source src={item.img} type="video/mp4" />
           </video>
         ) : (
