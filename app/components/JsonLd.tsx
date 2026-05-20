@@ -61,7 +61,6 @@ export function LocalBusinessJsonLd() {
       "Warehouse Power",
       "Energy-Efficient Lighting",
       "Lighting Retrofits",
-      "Warehouse Automation",
     ],
   };
 

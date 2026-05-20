@@ -290,6 +290,7 @@ export default function AboutPage() {
             {[
               { name: "Laurie Jenkins", title: "General Manager" },
               { name: "Maryanne Hanenberg", title: "HR Director" },
+              { name: "Carlos Chavez", title: "Safety Manager" },
               { name: "Jorge Lagunas", title: "Project Manager" },
               { name: "Honorio De Luna", title: "Project Manager" },
               { name: "Aidan Steele", title: "Estimator" },

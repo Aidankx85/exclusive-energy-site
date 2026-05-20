@@ -16,7 +16,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/service-details/efficiency`, lastModified: now, changeFrequency: "yearly", priority: 0.6 },
     { url: `${SITE_URL}/service-details/maintenance`, lastModified: now, changeFrequency: "yearly", priority: 0.6 },
     { url: `${SITE_URL}/service-details/warehouse-power`, lastModified: now, changeFrequency: "yearly", priority: 0.6 },
-    { url: `${SITE_URL}/service-details/warehouse-automation`, lastModified: now, changeFrequency: "yearly", priority: 0.6 },
   ];
 
   const sectorRoutes: MetadataRoute.Sitemap = SECTOR_SLUGS.map((slug) => ({

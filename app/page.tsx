@@ -223,7 +223,7 @@ export default function Home() {
   className="py-20 px-6 bg-white text-gray-800"
 >
   <h2 className="text-3xl font-bold mb-12 text-center">Our Services</h2>
-  <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 justify-center">
+  <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-center">
     {/* Tenant Improvements card */}
 <motion.div
   className="relative group overflow-hidden rounded-lg shadow-lg"
@@ -262,13 +262,6 @@ export default function Home() {
         desc: "Scheduled inspections, maintenance, and emergency repairs for lasting system health.",
         img: "/what4.jpg"
       },
-      {
-        href: "/service-details/warehouse-automation",
-        title: "Warehouse Automation",
-        desc: "Turnkey automation systems including autonomous Robots and smart controls — engineered to streamline operations.",
-        img: "/warehouse-robot-.mp4",
-        video: true
-      },
     ].map((item, idx) => (
       <motion.div
         key={item.title}
@@ -278,21 +271,7 @@ export default function Home() {
         transition={{ duration: 0.6, delay: (idx + 1) * 0.1 }}
         viewport={{ once: true }}
       >
-        {item.video ? (
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            poster="/warehouse-robot-cover.jpg"
-            className="w-full h-80 object-cover"
-          >
-            <source src={item.img} type="video/mp4" />
-          </video>
-        ) : (
-          <Image src={item.img} alt={item.title} width={400} height={320} className="w-full h-80 object-cover group-hover:scale-105 transition-transform" />
-        )}
+        <Image src={item.img} alt={item.title} width={400} height={320} className="w-full h-80 object-cover group-hover:scale-105 transition-transform" />
         <div className="absolute inset-0 bg-black/50 flex flex-col justify-end p-4 text-white">
           <h3 className="text-lg font-bold">{item.title}</h3>
           <p className="text-sm mb-3">{item.desc}</p>

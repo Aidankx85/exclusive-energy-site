@@ -2,122 +2,220 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import RotatingHero from "../components/RotatingHero";
-import { HERO_IMAGES } from "../lib/site";
+import { motion } from "framer-motion";
+import SiteNav from "../components/SiteNav";
+
+type Capability = {
+  number: string;
+  title: string;
+  body: string;
+  bullets: string[];
+  img: string;
+  href: string;
+};
+
+const CAPABILITIES: Capability[] = [
+  {
+    number: "01",
+    title: "Tenant Improvements",
+    body: "We power buildouts and upgrades for offices, warehouses, and retail. Feeders, panels, branch circuits, lighting, and low-voltage — wired clean and inspection-ready so our general-contractor partners can close out on schedule.",
+    bullets: [
+      "New service & panel installs",
+      "Lighting & power for offices, retail, restaurants",
+      "Low-voltage rough-in & device trim",
+      "Coordination with GC schedules and inspectors",
+    ],
+    img: "/what1.jpeg",
+    href: "/service-details/wiring",
+  },
+  {
+    number: "02",
+    title: "Lighting & Energy Efficiency",
+    body: "LED retrofits, Title 24 commissioning, lighting controls, and rebate-driven upgrades. We help owners and tenants cut energy spend while hitting the foot-candle, aesthetics, and code targets each space actually needs.",
+    bullets: [
+      "Interior, exterior, industrial & retail lighting",
+      "LED retrofits and controls upgrades",
+      "Title 24 commissioning",
+      "Utility rebates & tax-incentive routing",
+    ],
+    img: "/what2.jpeg",
+    href: "/service-details/efficiency",
+  },
+  {
+    number: "03",
+    title: "Warehouse Power",
+    body: "High-load distribution, dock power, EV charging, and process feeds for logistics, manufacturing, and cold storage. Sized right, routed cleanly, and built for the demands of 24/7 operations.",
+    bullets: [
+      "Service entrances & switchgear",
+      "EV charging stations (Level 2 / DCFC)",
+      "Forklift & material-handling power",
+      "Cold storage and process feeds",
+    ],
+    img: "/what3.jpg",
+    href: "/service-details/warehouse-power",
+  },
+  {
+    number: "04",
+    title: "Service & Maintenance",
+    body: "Scheduled inspections, panel maintenance, troubleshooting, and emergency repairs for the buildings we wired — and the ones we didn't. One number to call when something goes dark.",
+    bullets: [
+      "Preventive maintenance programs",
+      "Panel & breaker servicing",
+      "Lighting & ballast replacements",
+      "Emergency response across SoCal",
+    ],
+    img: "/what4.jpg",
+    href: "/service-details/maintenance",
+  },
+];
 
 export default function ServicesPage() {
-
-  const services = [
-    {
-      img: "/what1.jpeg",
-      title: "Tenant Improvements", // CHANGED TITLE HERE
-      desc: "Expertly installed electrical infrastructure to support safe and reliable systems.",
-      href: "/service-details/wiring",
-    },
-    {
-      img: "/what2.jpeg",
-      title: "Energy Efficient Solutions",
-      desc: "Lighting and automation upgrades designed to save energy and reduce costs.",
-      href: "/service-details/efficiency", // ENSURED CORRECT LINK HERE
-    },
-    {
-      img: "/what3.jpg",
-      title: "Warehouse Power Solutions",
-      desc: "High-load electrical solutions customized for safe and efficient warehouse operations.",
-      href: "/service-details/warehouse-power",
-    },
-    {
-      img: "/what4.jpg",
-      title: "Service & Maintenance",
-      desc: "Scheduled inspections, maintenance, and emergency repairs for lasting system health.",
-      href: "/service-details/maintenance",
-    },
-    {
-      img: "/warehouse-robot-cover.jpg",
-      title: "Warehouse Automation",
-      desc: "Turnkey automation systems including autonomous forklifts and smart controls — engineered to streamline operations.",
-      href: "/service-details/warehouse-automation",
-    },
-  ];
-
   return (
-    <div className="flex flex-col min-h-screen bg-white text-white">
-      {/* Navigation Bar */}
-      <nav className="fixed top-0 w-full z-50 px-14 pt-6 pb-3 flex items-center justify-between bg-gradient-to-b from-black/60 to-transparent">
-        <div className="flex items-center gap-6">
-          <Link href="/">
-            <Image src="/exclusive-logo.png" alt="Exclusive Logo" width={128} height={128} className="mt-2 cursor-pointer" />
-          </Link>
-          <span className="text-4xl font-bold -mt-1">Exclusive Energy & Electric</span>
-        </div>
-        <div className="hidden md:flex items-center gap-12 text-xl font-semibold">
-          {["Home", "About Us", "Services", "Portfolio", "Contact"].map((text, index) => {
-            const hrefs = ["/", "/about", "/services", "/portfolio", "/contact"];
-            return (
-              <Link href={hrefs[index]} key={index} className="hover:text-blue-400 relative group cursor-pointer">
-                <span>
-                  {text}
-                  <span className="absolute -top-2 left-0 w-full h-1 bg-white scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
-                </span>
-              </Link>
-            );
-          })}
-          <div className="flex items-center gap-5 ml-10">
-            <a href="https://www.facebook.com/exclusiveenergyinc/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <Image src="/facebook.png" alt="Facebook" width={40} height={40} className="filter invert transition-transform hover:scale-110 hover:brightness-200" />
-            </a>
-            <a href="https://www.instagram.com/exclusive_energy_electric/reels/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <Image src="/instagram.png" alt="Instagram" width={40} height={40} className="filter invert transition-transform hover:scale-110 hover:brightness-200" />
-            </a>
-            <a href="https://www.linkedin.com/company/exclusive-energy-inc-" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <Image src="/linkedin.png" alt="LinkedIn" width={40} height={40} className="filter invert transition-transform hover:scale-110 hover:brightness-200" />
-            </a>
-          </div>
-        </div>
-      </nav>
+    <div className="flex flex-col min-h-screen bg-white text-gray-900">
+      <SiteNav />
 
-      {/* Hero Section with Services Cards */}
-      <RotatingHero images={HERO_IMAGES} className="min-h-screen" overlayClassName="bg-black/40">
-        <div className="flex flex-col justify-center items-center px-10 pt-48 pb-20 min-h-screen">
-          <div className="w-full max-w-7xl bg-white/10 backdrop-blur-md pt-10 pb-20 px-6 rounded-2xl">
-            <h1 className="text-5xl font-bold mb-12 text-center tracking-wider text-white">Our Services</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 justify-center">
-              {services.map((item, idx) => (
-                <div key={idx} className="group flex flex-col h-full rounded-lg shadow-lg overflow-hidden bg-white transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-400/30">
-                  <div className="overflow-hidden">
-                    {item.href === "/service-details/warehouse-automation" ? (
-                      <video
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        preload="metadata"
-                        poster="/warehouse-robot-cover.jpg"
-                        className="w-full h-60 object-cover transition-transform duration-500 group-hover:scale-105"
-                      >
-                        <source src="/warehouse-robot-.mp4" type="video/mp4" />
-                      </video>
-                    ) : (
-                      <Image src={item.img} alt={item.title} width={500} height={240} sizes="(max-width: 600px) 90vw, (max-width: 1200px) 30vw, 240px" className="w-full h-60 object-cover transition-transform duration-500 group-hover:scale-105" />
-                    )}
-                  </div>
-                  <div className="bg-white text-black p-4 flex flex-col flex-1 justify-between">
-                    <div>
-                      <h3 className="text-lg font-bold text-blue-600 mb-2">{item.title}</h3>
-                      <p className="text-sm mb-4">{item.desc}</p>
-                    </div>
-                    <Link href={item.href}>
-                      <span className="bg-blue-600 text-white px-4 py-2 text-sm font-semibold rounded hover:bg-blue-700 text-center block w-fit cursor-pointer">
-                        READ MORE
-                      </span>
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+      {/* Hero */}
+      <section className="relative w-full h-[70vh] min-h-[480px] overflow-hidden">
+        <Image
+          src="/what3.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-black/65" />
+        <div className="relative h-full max-w-6xl mx-auto px-6 flex flex-col justify-end pb-20">
+          <p className="text-xs uppercase tracking-[0.3em] text-blue-300 font-semibold mb-5">
+            Capabilities
+          </p>
+          <h1 className="text-5xl md:text-7xl font-bold text-white leading-[1.05] max-w-4xl">
+            We power the buildings other contractors deliver.
+          </h1>
         </div>
-      </RotatingHero>
+      </section>
+
+      {/* Intro */}
+      <section className="bg-white py-24 px-6 border-b border-gray-100">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="text-xl md:text-2xl text-gray-700 leading-relaxed">
+            Exclusive Energy & Electric is a C-10 commercial electrical
+            subcontractor based in Corona, California. We wire, light, and
+            maintain the spaces that Southern California&apos;s leading general
+            contractors and owners build — from ground-up warehouses to tenant
+            improvements for Amazon, Chipotle, Hyatt, and Toyo Tires.
+          </p>
+          <p className="mt-6 text-sm uppercase tracking-[0.2em] text-gray-400 font-semibold">
+            License #902374 · ABC Member · Founded 2007
+          </p>
+        </div>
+      </section>
+
+      {/* Capabilities — alternating split layout */}
+      {CAPABILITIES.map((cap, idx) => {
+        const imageOnRight = idx % 2 === 1;
+        return (
+          <motion.section
+            key={cap.number}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6 }}
+            className={`py-20 md:py-24 px-6 ${
+              idx % 2 === 0 ? "bg-gray-50" : "bg-white"
+            }`}
+          >
+            <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+              <div
+                className={`relative aspect-[4/3] rounded-lg overflow-hidden shadow-2xl ${
+                  imageOnRight ? "md:order-2" : ""
+                }`}
+              >
+                <Image
+                  src={cap.img}
+                  alt={cap.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className={imageOnRight ? "md:order-1" : ""}>
+                <p className="text-sm font-bold text-blue-600 tracking-[0.2em] mb-3">
+                  {cap.number}
+                </p>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-5 leading-tight">
+                  {cap.title}
+                </h2>
+                <p className="text-lg text-gray-700 leading-relaxed mb-6">
+                  {cap.body}
+                </p>
+                <ul className="space-y-2 mb-8">
+                  {cap.bullets.map((bullet) => (
+                    <li
+                      key={bullet}
+                      className="flex gap-3 text-gray-700"
+                    >
+                      <span className="text-blue-600 font-bold mt-1">·</span>
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href={cap.href}
+                  className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition group"
+                >
+                  Learn more
+                  <span className="ml-2 transition-transform group-hover:translate-x-1">
+                    →
+                  </span>
+                </Link>
+              </div>
+            </div>
+          </motion.section>
+        );
+      })}
+
+      {/* Sectors band */}
+      <section className="bg-zinc-900 text-white py-24 px-6">
+        <div className="max-w-6xl mx-auto text-center">
+          <p className="text-xs uppercase tracking-[0.3em] text-blue-400 font-semibold mb-5">
+            Where We Work
+          </p>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
+            Commercial · Industrial · Government · Hospitality
+          </h2>
+          <p className="text-lg text-zinc-300 max-w-3xl mx-auto mb-10">
+            Warehouses, retail chains, offices, EV charging stations, religious
+            centers, and government buildings — across Southern California.
+          </p>
+          <Link
+            href="/portfolio"
+            className="inline-block border-2 border-white text-white px-8 py-3 rounded font-semibold hover:bg-white hover:text-zinc-900 transition"
+          >
+            See our portfolio
+          </Link>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="bg-blue-600 text-white py-24 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl md:text-5xl font-bold mb-5 leading-tight">
+            Have a project in mind?
+          </h2>
+          <p className="text-lg text-blue-100 mb-10 max-w-2xl mx-auto">
+            Send us your plans, scope, or timeline. You&apos;ll get a real
+            estimate from people who&apos;ve been wiring Southern California
+            since 2007.
+          </p>
+          <Link
+            href="/contact"
+            className="inline-block bg-white text-blue-600 px-8 py-4 rounded font-semibold hover:bg-blue-50 transition shadow-lg"
+          >
+            Get a free estimate
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }
