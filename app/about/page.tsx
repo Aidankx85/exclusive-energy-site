@@ -126,20 +126,30 @@ export default function AboutPage() {
                 {/* TODO: swap to a real photo at /public/leadership/ceo.jpg (or wherever you put it) */}
                 <Image
                   src="/exclusive-logo.png"
-                  alt="CEO"
+                  alt="Walter Jenkins, CEO"
                   fill
                   sizes="224px"
                   className="object-contain p-10 opacity-40"
                 />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-1">[CEO Name]</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-1">Walter Jenkins</h3>
               <p className="text-blue-600 font-semibold uppercase tracking-wider text-sm mb-4">
                 Chief Executive Officer
               </p>
               <p className="text-gray-600 leading-relaxed max-w-md mx-auto">
-                [Short bio — 2 to 3 sentences. Background, role at the company,
-                and what clients can expect from working with him.]
+                Founding partner of Exclusive Energy & Electric, Walter helps building owners, tenants, and property managers source the most cost-effective, energy-efficient lighting and electrical solutions. He brings deep manufacturer relationships and up-to-date knowledge of energy rebates and tax incentives to every project.
               </p>
+              <div className="mt-4 flex items-center justify-center gap-2 flex-wrap">
+                <span className="text-xs uppercase tracking-wider text-gray-400 font-semibold">
+                  Contact
+                </span>
+                <a
+                  href="mailto:walterj@exclusive-ca.com"
+                  className="text-blue-600 font-semibold hover:text-blue-800 hover:underline"
+                >
+                  walterj@exclusive-ca.com
+                </a>
+              </div>
             </div>
 
             {/* President */}
@@ -148,20 +158,159 @@ export default function AboutPage() {
                 {/* TODO: swap to a real photo at /public/leadership/president.jpg */}
                 <Image
                   src="/exclusive-logo.png"
-                  alt="President"
+                  alt="Kyle Hanenberg, President"
                   fill
                   sizes="224px"
                   className="object-contain p-10 opacity-40"
                 />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-1">[President Name]</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-1">Kyle Hanenberg</h3>
               <p className="text-blue-600 font-semibold uppercase tracking-wider text-sm mb-4">
                 President
               </p>
               <p className="text-gray-600 leading-relaxed max-w-md mx-auto">
-                [Short bio — 2 to 3 sentences. Same template.]
+                Bio coming soon.
               </p>
+              <div className="mt-4 flex items-center justify-center gap-2 flex-wrap">
+                <span className="text-xs uppercase tracking-wider text-gray-400 font-semibold">
+                  Contact
+                </span>
+                <a
+                  href="mailto:kyleh@exclusive-ca.com"
+                  className="text-blue-600 font-semibold hover:text-blue-800 hover:underline"
+                >
+                  kyleh@exclusive-ca.com
+                </a>
+              </div>
             </div>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Sales */}
+      <motion.section
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="bg-gray-50 py-24 px-6"
+      >
+        <div className="max-w-6xl mx-auto">
+          <p className="text-xs uppercase tracking-[0.25em] text-blue-600 font-semibold text-center mb-3">
+            Sales
+          </p>
+          <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-4">
+            Talk to Our Team
+          </h2>
+          <p className="text-center text-gray-500 max-w-2xl mx-auto mb-16">
+            Reach out directly for project quotes, walkthroughs, and estimates.
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-20">
+            {/* Vincent Elefante */}
+            <div className="text-center">
+              <div className="relative w-56 h-56 mx-auto mb-6 rounded-full overflow-hidden bg-gray-100 ring-4 ring-blue-50 shadow-lg">
+                <Image
+                  src="/VincentProfile.png"
+                  alt="Vincent Elefante, Sales"
+                  fill
+                  sizes="224px"
+                  className="object-cover"
+                />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-1">Vincent Elefante</h3>
+              <p className="text-blue-600 font-semibold uppercase tracking-wider text-sm mb-4">
+                Sales
+              </p>
+              <div className="mt-4 flex items-center justify-center gap-2 flex-wrap">
+                <span className="text-xs uppercase tracking-wider text-gray-400 font-semibold">
+                  Contact
+                </span>
+                <a
+                  href="mailto:vincente@exclusive-ca.com"
+                  className="text-blue-600 font-semibold hover:text-blue-800 hover:underline"
+                >
+                  vincente@exclusive-ca.com
+                </a>
+              </div>
+            </div>
+
+            {/* Bryan Burns */}
+            <div className="text-center">
+              <div className="relative w-56 h-56 mx-auto mb-6 rounded-full overflow-hidden bg-gray-100 ring-4 ring-blue-50 shadow-lg">
+                {/* TODO: swap to a real photo at /public/sales/bryan.jpg */}
+                <Image
+                  src="/exclusive-logo.png"
+                  alt="Bryan Burns, Sales"
+                  fill
+                  sizes="224px"
+                  className="object-contain p-10 opacity-40"
+                />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-1">Bryan Burns</h3>
+              <p className="text-blue-600 font-semibold uppercase tracking-wider text-sm mb-4">
+                Sales
+              </p>
+              <div className="mt-4 flex items-center justify-center gap-2 flex-wrap">
+                <span className="text-xs uppercase tracking-wider text-gray-400 font-semibold">
+                  Contact
+                </span>
+                <a
+                  href="mailto:bryanb@exclusive-ca.com"
+                  className="text-blue-600 font-semibold hover:text-blue-800 hover:underline"
+                >
+                  bryanb@exclusive-ca.com
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Operations & Office */}
+      <motion.section
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="bg-white py-24 px-6"
+      >
+        <div className="max-w-6xl mx-auto">
+          <p className="text-xs uppercase tracking-[0.25em] text-blue-600 font-semibold text-center mb-3">
+            Operations & Office
+          </p>
+          <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-4">
+            The Team Behind Every Project
+          </h2>
+          <p className="text-center text-gray-500 max-w-2xl mx-auto mb-16">
+            From estimation to project management to back-office support — the people who keep every job on track.
+          </p>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-10">
+            {[
+              { name: "Laurie Jenkins", title: "General Manager" },
+              { name: "Maryanne Hanenberg", title: "HR Director" },
+              { name: "Jorge Lagunas", title: "Project Manager" },
+              { name: "Honorio De Luna", title: "Project Manager" },
+              { name: "Aidan Steele", title: "Estimator" },
+              { name: "Gaby Garcia", title: "Accountant" },
+            ].map((person) => (
+              <div key={person.name} className="text-center">
+                <div className="relative w-40 h-40 mx-auto mb-4 rounded-full overflow-hidden bg-gray-100 ring-4 ring-blue-50 shadow-md">
+                  <Image
+                    src="/exclusive-logo.png"
+                    alt={`${person.name}, ${person.title}`}
+                    fill
+                    sizes="160px"
+                    className="object-contain p-8 opacity-40"
+                  />
+                </div>
+                <h3 className="text-lg font-bold text-gray-900 mb-1">{person.name}</h3>
+                <p className="text-blue-600 font-semibold uppercase tracking-wider text-xs">
+                  {person.title}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </motion.section>
