@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import RotatingHero from "../components/RotatingHero";
 import SiteNav from "../components/SiteNav";
@@ -290,6 +291,33 @@ export default function AboutPage() {
           </div>
         </div>
       </motion.section>
+
+      {/* CTA */}
+      <section className="bg-blue-600 text-white py-20 md:py-24 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl md:text-5xl font-bold mb-5 leading-tight">
+            Want to work with our team?
+          </h2>
+          <p className="text-lg text-blue-100 mb-10 max-w-2xl mx-auto">
+            Walter, Kyle, Vincent, Bryan, and the rest of the team are ready to
+            scope your next project. Send us your plans or just give us a call.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link
+              href="/contact"
+              className="inline-block bg-white text-blue-600 px-8 py-4 rounded font-semibold hover:bg-blue-50 transition shadow-lg w-full sm:w-auto"
+            >
+              Get a free estimate
+            </Link>
+            <a
+              href="tel:9512997505"
+              className="inline-block border-2 border-white text-white px-8 py-4 rounded font-semibold hover:bg-white hover:text-blue-600 transition w-full sm:w-auto"
+            >
+              Call 951-299-7505
+            </a>
+          </div>
+        </div>
+      </section>
 
       {/* Footer will automatically stay below */}
     </div>

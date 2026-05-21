@@ -246,6 +246,7 @@ export default function Home() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
+        id="who-we-are"
         className="bg-gray-100 text-gray-800 py-16 md:py-20 px-4 sm:px-6"
       >
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 md:gap-10 items-center bg-white p-6 sm:p-8 md:p-10 rounded-xl shadow-lg">
@@ -263,6 +264,33 @@ export default function Home() {
           </div>
         </div>
       </motion.section>
+
+      {/* CTA */}
+      <section className="bg-blue-600 text-white py-20 md:py-24 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl md:text-5xl font-bold mb-5 leading-tight">
+            Ready to power your next project?
+          </h2>
+          <p className="text-lg text-blue-100 mb-10 max-w-2xl mx-auto">
+            Send us your scope, drawings, or timeline. You&apos;ll hear back
+            from a real estimator within one business day.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <button
+              onClick={() => setShowModal(true)}
+              className="inline-block bg-white text-blue-600 px-8 py-4 rounded font-semibold hover:bg-blue-50 transition shadow-lg w-full sm:w-auto"
+            >
+              Get a free estimate
+            </button>
+            <a
+              href="tel:9512997505"
+              className="inline-block border-2 border-white text-white px-8 py-4 rounded font-semibold hover:bg-white hover:text-blue-600 transition w-full sm:w-auto"
+            >
+              Call 951-299-7505
+            </a>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
