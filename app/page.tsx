@@ -91,27 +91,32 @@ export default function Home() {
       )}
 
       {/* Buildings We've Powered */}
-      <section className="bg-zinc-50 py-12 border-y border-zinc-200 text-zinc-700">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <p className="text-xs uppercase tracking-[0.2em] text-zinc-500 font-semibold mb-6">
+      <section className="bg-zinc-50 py-14 md:py-16 border-y border-zinc-200 text-zinc-700">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
+          <p className="text-xs uppercase tracking-[0.25em] text-zinc-500 font-semibold mb-8">
             Buildings We&apos;ve Powered
           </p>
-          <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-4 mb-4">
-            <span className="text-2xl md:text-3xl font-bold">Amazon</span>
-            <span className="text-2xl md:text-3xl font-bold">Chipotle</span>
-            <span className="text-2xl md:text-3xl font-bold">Hyatt</span>
-            <span className="text-2xl md:text-3xl font-bold">Toyo Tires</span>
+          {/* TODO: Replace each <span> with an <Image src="/clients/[name].png" /> when
+              brand-approved single-color logos are available. */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-6 items-center mb-8 max-w-4xl mx-auto">
+            {["Amazon", "Chipotle", "Hyatt", "Toyo Tires"].map((name) => (
+              <div key={name} className="text-center">
+                <span className="text-xl md:text-2xl font-bold uppercase tracking-[0.15em] text-zinc-800">
+                  {name}
+                </span>
+              </div>
+            ))}
           </div>
           <p className="text-sm text-zinc-500 mb-6 max-w-2xl mx-auto">
-            As a trusted electrical subcontractor to leading general contractors across Southern California.
+            Trusted electrical subcontractor to leading general contractors across Southern California.
           </p>
-          <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-2 text-sm text-zinc-600">
+          <div className="flex flex-wrap justify-center items-center gap-x-3 gap-y-2 text-xs sm:text-sm text-zinc-600">
             <span className="font-semibold">License #902374</span>
-            <span aria-hidden>·</span>
+            <span aria-hidden className="text-zinc-300">·</span>
             <span>ABC Member</span>
-            <span aria-hidden>·</span>
+            <span aria-hidden className="text-zinc-300">·</span>
             <span>Licensed &amp; Insured</span>
-            <span aria-hidden>·</span>
+            <span aria-hidden className="text-zinc-300">·</span>
             <span>Founded 2007</span>
           </div>
         </div>

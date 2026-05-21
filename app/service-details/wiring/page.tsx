@@ -1,39 +1,47 @@
-"use client";
-import Image from "next/image";
-import RotatingHero from "../../components/RotatingHero";
-import SiteNav from "../../components/SiteNav";
-
-const heroImages = [
-  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750887002/heroweb2_tryzvi.jpg",
-  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750887034/heroweb3_b7oqrn.jpg",
-  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750888911/heroweb4_hckujj.jpg",
-  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750888772/webhero2_xpj64z.jpg",
-  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750887046/heroweb5_jjw3vm.jpg",
-];
+import ServiceDetail from "../../components/ServiceDetail";
 
 export default function TenantImprovementsPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-white text-white">
-      <SiteNav />
-      {/* Hero Section */}
-      <RotatingHero images={heroImages} className="min-h-screen" overlayClassName="bg-black/40">
-        <div className="h-full flex flex-col justify-center items-center px-4 md:px-10 pt-48">
-        <div className="flex justify-center w-full">
-          <div className="bg-white text-gray-800 rounded-xl shadow-xl flex flex-col md:flex-row items-center max-w-5xl w-full p-6 sm:p-10 gap-6 md:gap-10">
-            <Image src="/what1.jpeg" alt="Tenant Improvements" width={420} height={340} className="rounded-lg shadow-md object-cover w-full md:w-[420px] h-auto md:h-[340px] aspect-[4/3] md:aspect-auto" />
-            {/* Divider line for desktop */}
-            <div className="hidden md:block h-full w-px bg-gray-300 mx-6" />
-            <div className="flex flex-col justify-center max-w-xl">
-              <h1 className="text-3xl font-bold text-blue-600 mb-4">Tenant Improvements</h1>
-              <p className="text-lg mb-2">
-                Our tenant improvement solutions deliver expertly installed electrical infrastructure for retail, commercial, and industrial spaces. We work closely with clients to design and implement electrical systems that are safe, reliable, and tailored to project needs—whether you’re reconfiguring office layouts, adding lighting, or upgrading power distribution.
-              </p>
-              <p className="text-base">From new construction to modernizations and quick-turn remodels, trust our team to deliver results on time and within budget.</p>
-            </div>
-          </div>
-        </div>
-        </div>
-      </RotatingHero>
-    </div>
+    <ServiceDetail
+      number="01"
+      title="Tenant Improvements"
+      subtitle="Commercial buildouts wired clean and inspection-ready."
+      heroImage="/what1.jpeg"
+      intro="We've been the electrical subcontractor of choice for tenant improvements across Southern California since 2007. Whether you're a general contractor bidding out a fast-track TI for a national retailer or a building owner reconfiguring office layouts, we deliver electrical scope that closes out on schedule."
+      scope={[
+        "New service entrances and panel installs",
+        "Branch circuit rough-in and trim",
+        "Lighting, fixtures, and lighting controls",
+        "Low-voltage rough-in (data, AV, security back-boxes)",
+        "Code corrections and permit drawings",
+        "GC coordination from preconstruction through inspection",
+      ]}
+      whenThisFits={[
+        "Retail and restaurant rollouts where speed-to-open matters",
+        "Office reconfigurations between leases",
+        "Warehouse-to-office or office-to-flex space conversions",
+        "Multi-suite buildings cycling through tenants",
+      ]}
+      whyUs={[
+        "18+ years of TI experience across Southern California",
+        "C-10 Electrical Contractor — CSLB License #902374",
+        "Trusted by Amazon, Chipotle, Hyatt, Toyo Tires",
+        "ABC member, in-house estimating and project management",
+      ]}
+      faqs={[
+        {
+          q: "Can you handle fast-track schedules?",
+          a: "Yes — we've delivered TI scope on tight turnarounds for retail rollouts. The earlier we're looped in for preconstruction, the cleaner the close-out.",
+        },
+        {
+          q: "Do you work as a sub to general contractors?",
+          a: "That's our primary role. We coordinate with GCs from preconstruction through final inspection, with in-house estimating to support bid packages.",
+        },
+        {
+          q: "What's your service area?",
+          a: "Southern California — Riverside, Orange, Los Angeles, and San Bernardino counties most often.",
+        },
+      ]}
+    />
   );
 }

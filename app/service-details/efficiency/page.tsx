@@ -1,38 +1,47 @@
-"use client";
-import Image from "next/image";
-import RotatingHero from "../../components/RotatingHero";
-import SiteNav from "../../components/SiteNav";
-
-const heroImages = [
-  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750887002/heroweb2_tryzvi.jpg",
-  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750887034/heroweb3_b7oqrn.jpg",
-  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750888911/heroweb4_hckujj.jpg",
-  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750888772/webhero2_xpj64z.jpg",
-  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750887046/heroweb5_jjw3vm.jpg",
-];
+import ServiceDetail from "../../components/ServiceDetail";
 
 export default function EnergyEfficiencyPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-white text-white">
-      <SiteNav />
-      {/* Hero Section */}
-      <RotatingHero images={heroImages} className="min-h-screen" overlayClassName="bg-black/40">
-        <div className="h-full flex flex-col justify-center items-center px-4 md:px-10 pt-48">
-        <div className="flex justify-center w-full">
-          <div className="bg-white text-gray-800 rounded-xl shadow-xl flex flex-col md:flex-row items-center max-w-5xl w-full p-6 sm:p-10 gap-6 md:gap-10">
-            <Image src="/what2.jpeg" alt="Energy Efficient Solutions" width={420} height={340} className="rounded-lg shadow-md object-cover w-full md:w-[420px] h-auto md:h-[340px] aspect-[4/3] md:aspect-auto" />
-            <div className="hidden md:block h-full w-px bg-gray-300 mx-6" />
-            <div className="flex flex-col justify-center max-w-xl">
-              <h1 className="text-3xl font-bold text-blue-600 mb-4">Energy Efficient Solutions</h1>
-              <p className="text-lg mb-2">
-                Save money and energy with LED retrofits, advanced controls, and sustainable design. We engineer and install solutions that lower your utility bills and environmental footprint.
-              </p>
-              <p className="text-base">Get rebates, longer-lasting lighting, and future-ready systems with Exclusive Energy & Electric.</p>
-            </div>
-          </div>
-        </div>
-        </div>
-      </RotatingHero>
-    </div>
+    <ServiceDetail
+      number="02"
+      title="Lighting & Energy Efficiency"
+      subtitle="LED retrofits, controls, and rebate-driven upgrades."
+      heroImage="/what2.jpeg"
+      intro="We help building owners and tenants cut energy spend without compromising aesthetics or code requirements. From a single-tenant office to a 200,000 sq ft warehouse, we engineer and install lighting and controls that pay for themselves."
+      scope={[
+        "LED retrofits and full lighting replacements (interior, exterior, parking lot)",
+        "Lighting controls — occupancy, daylight harvesting, scheduling",
+        "Title 24 commissioning and acceptance testing",
+        "Utility rebate paperwork and routing (SCE, LADWP, others)",
+        "Energy audits and ROI projections",
+        "Industrial high-bay and warehouse lighting upgrades",
+      ]}
+      whenThisFits={[
+        "Aging fluorescent systems eating maintenance hours",
+        "New leases with tenant build-out lighting allowances",
+        "Properties chasing LEED or Title 24 compliance",
+        "Owners pursuing utility rebates and tax incentives",
+      ]}
+      whyUs={[
+        "Specialty in commercial lighting since 2007",
+        "Direct manufacturer relationships for fixture pricing",
+        "Title 24 commissioning handled in-house",
+        "Rebate experience across major Southern California utilities",
+      ]}
+      faqs={[
+        {
+          q: "Can you guarantee energy savings?",
+          a: "We provide projected savings based on photometric layout and your utility rate. Actual savings depend on usage, but most projects see meaningful lighting energy reductions — often 50% or more.",
+        },
+        {
+          q: "Will rebates cover part of the project cost?",
+          a: "Often a meaningful chunk — sometimes 30–50% depending on equipment and your utility's current program. We route the paperwork as part of the project.",
+        },
+        {
+          q: "What about controls?",
+          a: "We design controls strategy alongside the fixtures. For many properties, the controls deliver the bigger savings — fixtures cut watts, controls cut runtime.",
+        },
+      ]}
+    />
   );
 }
