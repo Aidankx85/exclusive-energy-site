@@ -283,15 +283,20 @@ export default function AboutPage() {
                   />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-1">{person.name}</h3>
-                <p className="text-blue-600 font-semibold uppercase tracking-wider text-xs mb-2">
+                <p className="text-blue-600 font-semibold uppercase tracking-wider text-xs">
                   {person.title}
                 </p>
-                <a
-                  href={`mailto:${person.email}`}
-                  className="text-xs text-blue-600 hover:text-blue-800 hover:underline break-all"
-                >
-                  {person.email}
-                </a>
+                <div className="mt-3 flex items-center justify-center gap-2 flex-wrap">
+                  <span className="text-[10px] uppercase tracking-wider text-gray-400 font-semibold">
+                    Contact
+                  </span>
+                  <a
+                    href={`mailto:${person.email}`}
+                    className="text-xs text-blue-600 font-semibold hover:text-blue-800 hover:underline break-all"
+                  >
+                    {person.email}
+                  </a>
+                </div>
               </div>
             ))}
           </div>
