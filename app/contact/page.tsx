@@ -63,7 +63,10 @@ export default function ContactPage() {
         </div>
         {/* Right: Contact Form */}
         <div className="flex-1 flex flex-col justify-center bg-white rounded-xl shadow-xl p-8">
-          <h2 className="text-2xl font-bold mb-4 text-blue-700">Request an Estimate</h2>
+          <h2 className="text-2xl font-bold mb-2 text-blue-700">Request an Estimate</h2>
+          <p className="text-sm text-gray-600 mb-6">
+            Tell us about your project — scope, square footage, timeline, anything we should know. You&apos;ll hear back from a real estimator within one business day.
+          </p>
           <EstimateForm variant="inline" />
         </div>
       </section>

@@ -60,8 +60,18 @@ export async function POST(request: Request) {
     sourceUrl: request.headers.get("referer") || null,
   };
 
-  // TODO: wire up email/CRM delivery. For now, log server-side and accept.
-  console.log("[estimate] New submission", payload);
+  // TODO: wire up email/CRM delivery (e.g. Resend). Until then, log only
+  // non-PII metadata so Vercel function logs aren't a leak surface.
+  console.log("[estimate] New submission", {
+    projectType: payload.projectType,
+    role: payload.role,
+    timeline: payload.timeline,
+    submittedAt: payload.submittedAt,
+    sourceUrl: payload.sourceUrl,
+    companyDomain: typeof payload.email === "string"
+      ? payload.email.split("@")[1] || null
+      : null,
+  });
 
   return NextResponse.json({ success: true });
 }

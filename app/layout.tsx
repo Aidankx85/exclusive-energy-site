@@ -34,13 +34,22 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: `${SITE_NAME} — ${SITE_TAGLINE}`,
     description: SITE_DESCRIPTION,
-    images: [{ url: "/exclusive-logo.png", width: 1200, height: 630, alt: SITE_NAME }],
+    images: [
+      {
+        url: "https://res.cloudinary.com/dtqxebti9/image/upload/c_fill,g_auto,w_1200,h_630,f_auto,q_auto/v1750887002/heroweb2_tryzvi.jpg",
+        width: 1200,
+        height: 630,
+        alt: SITE_NAME,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${SITE_NAME} — ${SITE_TAGLINE}`,
     description: SITE_DESCRIPTION,
-    images: ["/exclusive-logo.png"],
+    images: [
+      "https://res.cloudinary.com/dtqxebti9/image/upload/c_fill,g_auto,w_1200,h_630,f_auto,q_auto/v1750887002/heroweb2_tryzvi.jpg",
+    ],
   },
   robots: { index: true, follow: true },
   icons: {
@@ -147,10 +156,10 @@ export default function RootLayout({
               <div>
                 <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
                 <ul className="space-y-2 text-sm">
-                  <li><Link href="/about" className="hover:text-blue-600">+ About</Link></li>
-                  <li><Link href="/services" className="hover:text-blue-600">+ Services</Link></li>
-                  <li><Link href="/portfolio" className="hover:text-blue-600">+ Portfolio</Link></li>
-                  <li><Link href="/contact" className="hover:text-blue-600">+ Contact</Link></li>
+                  <li><Link href="/about" className="hover:text-blue-600">About</Link></li>
+                  <li><Link href="/services" className="hover:text-blue-600">Services</Link></li>
+                  <li><Link href="/portfolio" className="hover:text-blue-600">Portfolio</Link></li>
+                  <li><Link href="/contact" className="hover:text-blue-600">Contact</Link></li>
                 </ul>
               </div>
 
