@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import EstimateForm from "./components/EstimateForm";
+import SiteNav from "./components/SiteNav";
 import { SECTORS } from "./portfolio/sectors";
 import { cld } from "./lib/cloudinary";
 
@@ -27,54 +28,12 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
-  const navLinks = [
-    { text: "Home", href: "/" },
-    { text: "About Us", href: "/about" },
-    { text: "Services", href: "/services" },
-    { text: "Portfolio", href: "/portfolio" },
-    { text: "Contact", href: "/contact" },
-  ];
-
   return (
     <div className="flex flex-col min-h-screen bg-white text-white">
-      {/* Navigation */}
-      <motion.nav
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="fixed top-0 w-full z-50 px-14 pt-6 pb-3 flex items-center justify-between bg-gradient-to-b from-black/60 to-transparent"
-      >
-        <div className="flex items-center gap-6">
-          <Link href="/">
-            <Image src="/exclusive-logo.png" alt="Exclusive Logo" width={128} height={128} className="mt-2 cursor-pointer" />
-          </Link>
-          <span className="text-4xl font-bold -mt-1">Exclusive Energy & Electric</span>
-        </div>
-        <div className="hidden md:flex items-center gap-12 text-xl font-semibold">
-          {navLinks.map(({ text, href }) => (
-            <Link key={text} href={href}>
-              <span className="hover:text-blue-400 relative group cursor-pointer">
-                {text}
-                <span className="absolute -top-2 left-0 w-full h-1 bg-white scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
-              </span>
-            </Link>
-          ))}
-          <div className="flex items-center gap-5 ml-10">
-            <a href="https://www.facebook.com/exclusiveenergyinc/" target="_blank" rel="noopener noreferrer">
-              <Image src="/facebook.png" alt="Facebook" width={40} height={40} className="filter invert transition-transform hover:scale-110 hover:brightness-200" />
-            </a>
-            <a href="https://www.instagram.com/exclusive_energy_electric/reels/" target="_blank" rel="noopener noreferrer">
-              <Image src="/instagram.png" alt="Instagram" width={40} height={40} className="filter invert transition-transform hover:scale-110 hover:brightness-200" />
-            </a>
-            <a href="https://www.linkedin.com/company/exclusive-energy-inc-" target="_blank" rel="noopener noreferrer">
-              <Image src="/linkedin.png" alt="LinkedIn" width={40} height={40} className="filter invert transition-transform hover:scale-110 hover:brightness-200" />
-            </a>
-          </div>
-        </div>
-      </motion.nav>
+      <SiteNav />
 
       {/* Hero Section */}
-      <section className="h-screen flex items-center justify-start px-10 relative overflow-hidden">
+      <section className="h-screen flex items-center justify-start px-4 sm:px-6 md:px-10 relative overflow-hidden">
         {heroImages.map((src, i) => (
           <Image
             key={src}
@@ -94,9 +53,8 @@ export default function Home() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h1 className="text-5xl font-bold mb-4 leading-tight">
-            Where Energy Meets Excellence.<br />
-            
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 leading-tight">
+            Where Energy Meets Excellence.
           </h1>
           <p className="text-lg mb-3 font-normal text-white max-w-md">
             Proudly serving Southern California for over 20 years with unmatched efficiency and care.
@@ -288,10 +246,10 @@ export default function Home() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="bg-gray-100 text-gray-800 py-20 px-6"
+        className="bg-gray-100 text-gray-800 py-16 md:py-20 px-4 sm:px-6"
       >
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center bg-white p-10 rounded-xl shadow-lg">
-          <Image src="/whoweare.jpeg" alt="Who We Are" width={600} height={400} className="rounded-lg shadow-md" />
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 md:gap-10 items-center bg-white p-6 sm:p-8 md:p-10 rounded-xl shadow-lg">
+          <Image src="/whoweare.jpeg" alt="Who We Are" width={600} height={400} className="w-full h-auto rounded-lg shadow-md" />
           <div>
             <h2 className="text-3xl font-bold text-blue-600 mb-4">Who We Are</h2>
             <p className="text-lg leading-relaxed">

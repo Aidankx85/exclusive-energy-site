@@ -3,169 +3,112 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import SiteNav from "../components/SiteNav";
 import { cld } from "../lib/cloudinary";
-
-const HERO_IMAGE = cld(
-  "https://res.cloudinary.com/dtqxebti9/image/upload/v1750887002/heroweb2_tryzvi.jpg",
-  { width: 1920 },
-);
-
-const projects = [
-  {
-    name: "Government",
-    href: "/portfolio/goverment",
-    img: cld(
-      "https://res.cloudinary.com/dtqxebti9/image/upload/v1751398014/Firesttion_8_1_1_w4h2go.jpg",
-      { width: 800 },
-    ),
-  },
-  {
-    name: "Warehouse",
-    href: "/portfolio/warehouse",
-    img: cld(
-      "https://res.cloudinary.com/dtqxebti9/image/upload/v1751401471/Ca_Greenhouse-1_ffz9cb.heic",
-      { width: 800 },
-    ),
-  },
-  {
-    name: "Offices",
-    href: "/portfolio/offices",
-    img: cld(
-      "https://res.cloudinary.com/dtqxebti9/image/upload/v1751402017/Sysparo-1_z7iuxc.jpg",
-      { width: 800 },
-    ),
-  },
-  {
-    name: "Retail / Food Chain",
-    href: "/portfolio/retail",
-    img: cld(
-      "https://res.cloudinary.com/dtqxebti9/image/upload/v1753735143/IMG_3945_n42ciu.jpg",
-      { width: 800 },
-    ),
-  },
-  {
-    name: "Hospitality",
-    href: "/portfolio/hospitality",
-    img: cld(
-      "https://res.cloudinary.com/dtqxebti9/image/upload/v1751403403/Hyatt_Irvine_-_1_prjoof.heic",
-      { width: 800 },
-    ),
-  },
-  {
-    name: "EV Charging Stations",
-    href: "/portfolio/evcharge",
-    img: cld(
-      "https://res.cloudinary.com/dtqxebti9/image/upload/v1751402873/Toyo_Ev_GOAT_chargers-1_hs2njc.jpg",
-      { width: 800 },
-    ),
-  },
-  {
-    name: "Miscellaneous",
-    href: "/portfolio/miscellaneous",
-    img: cld(
-      "https://res.cloudinary.com/dtqxebti9/image/upload/v1751402525/Rexford_ps3tuq.heic",
-      { width: 800 },
-    ),
-  },
-];
+import { SECTORS } from "./sectors";
 
 export default function PortfolioPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-white text-white">
-      {/* Navigation */}
-      <motion.nav
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="fixed top-0 w-full z-50 px-14 pt-6 pb-3 flex items-center justify-between bg-gradient-to-b from-black/60 to-transparent"
-      >
-        <div className="flex items-center gap-6">
-          <Link href="/">
-            <Image src="/exclusive-logo.png" alt="Exclusive Logo" width={64} height={64} className="mt-2 cursor-pointer" />
-          </Link>
-          <span className="text-3xl font-bold -mt-1">Exclusive Energy & Electric</span>
-        </div>
-        <div className="hidden md:flex items-center gap-12 text-xl font-semibold">
-          {[
-            { text: "Home", href: "/" },
-            { text: "About Us", href: "/about" },
-            { text: "Services", href: "/services" },
-            { text: "Portfolio", href: "/portfolio" },
-            { text: "Contact", href: "/contact" },
-          ].map((link) => (
-            <Link key={link.text} href={link.href}>
-              <span className="hover:text-blue-400 relative group cursor-pointer">{link.text}
-                <span className="absolute -top-2 left-0 w-full h-1 bg-white scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
-              </span>
-            </Link>
-          ))}
-          <div className="flex items-center gap-5 ml-10">
-            <a href="https://www.facebook.com/exclusiveenergyinc/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <Image src="/facebook.png" alt="Facebook" width={30} height={30} className="filter invert" />
-            </a>
-            <a href="https://www.instagram.com/exclusive_energy_electric/reels/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <Image src="/instagram.png" alt="Instagram" width={30} height={30} className="filter invert" />
-            </a>
-            <a href="https://www.linkedin.com/company/exclusive-energy-inc-" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <Image src="/linkedin.png" alt="LinkedIn" width={30} height={30} className="filter invert" />
-            </a>
-          </div>
-        </div>
-      </motion.nav>
+    <div className="flex flex-col min-h-screen bg-white text-gray-900">
+      <SiteNav />
 
-      {/* Hero & Projects */}
-      <section className="relative min-h-screen flex flex-col justify-start items-center px-10 pt-44 pb-20 overflow-hidden">
+      {/* Hero */}
+      <section className="relative w-full h-[60vh] min-h-[420px] overflow-hidden">
         <Image
-          src={HERO_IMAGE}
+          src={cld(SECTORS[0].coverImage, { width: 1920 })}
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover z-0"
+          className="object-cover"
         />
-        <div className="absolute inset-0 bg-black/60 z-0" />
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="relative z-10 text-6xl font-extrabold mb-16 mt-4 text-white drop-shadow-lg"
-          style={{ letterSpacing: "2px" }}
-        >
-          Projects
-        </motion.h1>
+        <div className="absolute inset-0 bg-black/65" />
+        <div className="relative h-full max-w-6xl mx-auto px-4 sm:px-6 flex flex-col justify-end pb-16">
+          <p className="text-xs uppercase tracking-[0.3em] text-blue-300 font-semibold mb-4">
+            Portfolio
+          </p>
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white leading-[1.05] max-w-4xl">
+            The buildings we&apos;ve powered across Southern California.
+          </h1>
+        </div>
+      </section>
 
-        <div className="relative z-10 w-full max-w-7xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
-          {projects.map((proj, idx) => (
-            <motion.div
-              key={proj.name}
-              initial={{ opacity: 0, y: 60 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: idx * 0.08 }}
-              className="group relative overflow-hidden rounded-2xl shadow-2xl bg-white/90 flex flex-col items-center justify-center min-h-[370px] hover:scale-105 hover:shadow-blue-400/50 transition-all"
-            >
-              <Link href={proj.href} className="block w-full h-full">
-                <div className="relative w-full h-[240px] rounded-t-2xl overflow-hidden">
+      {/* Intro */}
+      <section className="bg-white py-16 md:py-20 px-4 sm:px-6 border-b border-gray-100">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+            From warehouse builds for Amazon to lighting retrofits for retail
+            chains, Hyatt hotels, Toyo Tires, and government facilities — we
+            power commercial projects across every sector.
+          </p>
+        </div>
+      </section>
+
+      {/* Sectors grid */}
+      <section className="bg-gray-50 py-16 md:py-24 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto">
+          <p className="text-xs uppercase tracking-[0.3em] text-blue-600 font-semibold text-center mb-3">
+            Sectors
+          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+            Browse by Sector
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {SECTORS.map((sector, idx) => (
+              <motion.div
+                key={sector.slug}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: idx * 0.05 }}
+                viewport={{ once: true, margin: "-50px" }}
+              >
+                <Link
+                  href={`/portfolio/${sector.slug}`}
+                  className="group block relative overflow-hidden rounded-lg shadow-lg aspect-[4/3] bg-gray-200"
+                >
                   <Image
-                    src={proj.img}
-                    alt={proj.name}
+                    src={cld(sector.coverImage, { width: 800 })}
+                    alt={sector.title}
                     fill
-                    className="object-cover w-full h-full group-hover:scale-110 transition-transform"
-                    sizes="(max-width: 600px) 90vw, (max-width: 1200px) 40vw, 400px"
-                    priority={idx === 0}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                </div>
-                <div className="flex-1 flex flex-col justify-center items-center p-6">
-                  <h2 className="text-2xl font-extrabold text-gray-900 mb-1 text-center group-hover:text-blue-700 transition">
-                    {proj.name}
-                  </h2>
-                  {/* Optional: Add a line or animated bar below */}
-                  <span className="block w-12 h-1 rounded-full bg-blue-600 mx-auto my-3 group-hover:w-20 transition-all"></span>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/0" />
+                  <div className="absolute inset-x-0 bottom-0 p-5 text-white">
+                    <h3 className="text-xl md:text-2xl font-bold leading-tight">
+                      {sector.title}
+                    </h3>
+                    <p className="mt-1 text-sm text-white/85 line-clamp-2">
+                      {sector.tagline}
+                    </p>
+                    <span className="mt-3 inline-flex items-center text-sm font-semibold text-blue-300 transition-all group-hover:translate-x-1">
+                      View work →
+                    </span>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="bg-blue-600 text-white py-20 md:py-24 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl md:text-5xl font-bold mb-5 leading-tight">
+            Have a project to add to the portfolio?
+          </h2>
+          <p className="text-lg text-blue-100 mb-10 max-w-2xl mx-auto">
+            Send us your scope, timeline, or drawings. We&apos;ll get back with
+            a real estimate from people who&apos;ve been wiring Southern
+            California since 2007.
+          </p>
+          <Link
+            href="/contact"
+            className="inline-block bg-white text-blue-600 px-8 py-4 rounded font-semibold hover:bg-blue-50 transition shadow-lg"
+          >
+            Get a free estimate
+          </Link>
         </div>
       </section>
     </div>

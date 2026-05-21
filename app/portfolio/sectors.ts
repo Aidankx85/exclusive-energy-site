@@ -53,8 +53,7 @@ export const SECTORS: Sector[] = [
       "https://res.cloudinary.com/dtqxebti9/image/upload/f_auto/v1751403403/Hyatt_Irvine_-_1_prjoof.heic",
   },
   {
-    // NOTE: existing route folder is named "goverment" (typo). Slug matches to keep URLs stable.
-    slug: "goverment",
+    slug: "government",
     title: "Government Projects",
     tagline: "Proven Experience in Public Sector Construction.",
     description:
