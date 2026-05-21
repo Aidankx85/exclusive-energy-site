@@ -264,13 +264,13 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-10">
             {[
-              { name: "Laurie Jenkins", title: "General Manager" },
-              { name: "Maryanne Hanenberg", title: "HR Director" },
-              { name: "Carlos Chavez", title: "Safety Manager" },
-              { name: "Jorge Lagunas", title: "Project Manager" },
-              { name: "Honorio De Luna", title: "Project Manager" },
-              { name: "Aidan Steele", title: "Estimator" },
-              { name: "Gaby Garcia", title: "Accountant" },
+              { name: "Laurie Jenkins", title: "General Manager", email: "lauriej@exclusive-ca.com" },
+              { name: "Maryanne Hanenberg", title: "HR Director", email: "maryanneh@exclusive-ca.com" },
+              { name: "Carlos Chavez", title: "Safety Manager", email: "carlosc@exclusive-ca.com" },
+              { name: "Jorge Lagunas", title: "Project Manager", email: "jorgel@exclusive-ca.com" },
+              { name: "Honorio De Luna", title: "Project Manager", email: "honoriod@exclusive-ca.com" },
+              { name: "Aidan Steele", title: "Estimator", email: "aidans@exclusive-ca.com" },
+              { name: "Gaby Garcia", title: "Accountant", email: "gabyg@exclusive-ca.com" },
             ].map((person) => (
               <div key={person.name} className="text-center">
                 <div className="relative w-40 h-40 mx-auto mb-4 rounded-full overflow-hidden bg-gray-100 ring-4 ring-blue-50 shadow-md">
@@ -283,9 +283,15 @@ export default function AboutPage() {
                   />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-1">{person.name}</h3>
-                <p className="text-blue-600 font-semibold uppercase tracking-wider text-xs">
+                <p className="text-blue-600 font-semibold uppercase tracking-wider text-xs mb-2">
                   {person.title}
                 </p>
+                <a
+                  href={`mailto:${person.email}`}
+                  className="text-xs text-blue-600 hover:text-blue-800 hover:underline break-all"
+                >
+                  {person.email}
+                </a>
               </div>
             ))}
           </div>
